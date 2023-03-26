@@ -1,7 +1,19 @@
+using InvoicingSystemMVC.Controllers;
+using InvoicingSystemMVC.Models.Interfaces;
+using InvoicingSystemMVC.Models.Repositories;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IClienteRepository,ClienteRepository>();
+builder.Services.AddScoped<IContribuyenteRepository,ContribuyenteRepository>();
+builder.Services.AddScoped<IFacturaRepository,FacturaRepository>();
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 var app = builder.Build();
 

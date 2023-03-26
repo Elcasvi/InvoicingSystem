@@ -18,9 +18,6 @@
 
     <ItemGroup>
       <Folder Include="Helpers" />
-      <Folder Include="Models\Entities" />
-      <Folder Include="Models\Interfaces" />
-      <Folder Include="Models\Repositories" />
       <Folder Include="Models\ViewModels" />
     </ItemGroup>
 
