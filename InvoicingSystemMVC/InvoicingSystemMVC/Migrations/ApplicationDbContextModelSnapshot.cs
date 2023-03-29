@@ -25,31 +25,96 @@ namespace InvoicingSystemMVC.Migrations
             modelBuilder.Entity("InvoicingSystemMVC.Models.Entities.Cliente", b =>
                 {
                     b.Property<string>("RFC")
-                        .HasMaxLength(16)
-                        .HasColumnType("nvarchar(16)");
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("ContribuyenteId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RazonSocial")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("RegimenFiscal")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("RFC");
+
+                    b.HasIndex("ContribuyenteId");
 
                     b.ToTable("Clientes");
                 });
 
             modelBuilder.Entity("InvoicingSystemMVC.Models.Entities.Contribuyente", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("RFC")
-                        .HasMaxLength(16)
-                        .HasColumnType("nvarchar(16)");
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
 
                     b.Property<string>("RazonSocial")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("RFC");
+                    b.Property<string>("RegimenFiscal")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Contribuyentes");
+                });
+
+            modelBuilder.Entity("InvoicingSystemMVC.Models.Entities.ContribuyenteEmisor", b =>
+                {
+                    b.Property<string>("RFC")
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
+                    b.Property<string>("RazonSocial")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RegimenFiscal")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RFC");
+
+                    b.ToTable("ContribuyentesEmisores");
+                });
+
+            modelBuilder.Entity("InvoicingSystemMVC.Models.Entities.ContribuyenteReceptor", b =>
+                {
+                    b.Property<string>("RFC")
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
+                    b.Property<string>("RazonSocial")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RegimenFiscal")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RFC");
+
+                    b.ToTable("ContribuyentesReceptores");
                 });
 
             modelBuilder.Entity("InvoicingSystemMVC.Models.Entities.Factura", b =>
@@ -57,7 +122,11 @@ namespace InvoicingSystemMVC.Migrations
                     b.Property<int>("Id")
                         .HasColumnType("int");
 
-                    b.Property<string>("CP")
+                    b.Property<string>("CPEmisor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CPReceptor")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -107,11 +176,15 @@ namespace InvoicingSystemMVC.Migrations
 
                     b.Property<string>("RFCEmsior")
                         .IsRequired()
-                        .HasColumnType("nvarchar(16)");
+                        .HasColumnType("nvarchar(13)");
 
                     b.Property<string>("RFCReceptor")
                         .IsRequired()
-                        .HasColumnType("nvarchar(16)");
+                        .HasColumnType("nvarchar(13)");
+
+                    b.Property<string>("RegimenFiscalReceptor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Serie")
                         .HasColumnType("nvarchar(max)");
@@ -159,23 +232,34 @@ namespace InvoicingSystemMVC.Migrations
                     b.ToTable("Facturas");
                 });
 
-            modelBuilder.Entity("InvoicingSystemMVC.Models.Entities.Factura", b =>
+            modelBuilder.Entity("InvoicingSystemMVC.Models.Entities.Cliente", b =>
                 {
                     b.HasOne("InvoicingSystemMVC.Models.Entities.Contribuyente", "Contribuyente")
+                        .WithMany()
+                        .HasForeignKey("ContribuyenteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Contribuyente");
+                });
+
+            modelBuilder.Entity("InvoicingSystemMVC.Models.Entities.Factura", b =>
+                {
+                    b.HasOne("InvoicingSystemMVC.Models.Entities.ContribuyenteEmisor", "ContribuyenteEmisor")
                         .WithMany()
                         .HasForeignKey("RFCEmsior")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("InvoicingSystemMVC.Models.Entities.Cliente", "Cliente")
+                    b.HasOne("InvoicingSystemMVC.Models.Entities.ContribuyenteReceptor", "ContribuyenteReceptor")
                         .WithMany()
                         .HasForeignKey("RFCReceptor")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Cliente");
+                    b.Navigation("ContribuyenteEmisor");
 
-                    b.Navigation("Contribuyente");
+                    b.Navigation("ContribuyenteReceptor");
                 });
 #pragma warning restore 612, 618
         }

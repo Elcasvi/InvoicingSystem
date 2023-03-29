@@ -9,18 +9,20 @@ public class Factura
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public int Id { get; set; }
     
-    public Contribuyente Contribuyente { get; set; }
-    [ForeignKey("Contribuyente")]
+    public ContribuyenteEmisor ContribuyenteEmisor { get; set; }
+    [ForeignKey("ContribuyenteEmisor")]
     public string RFCEmsior { get; set; }
 
-    public Cliente Cliente { get; set; }
-    [ForeignKey("Cliente")]
+    public ContribuyenteReceptor ContribuyenteReceptor { get; set; }
+    [ForeignKey("ContribuyenteReceptor")]
     public string RFCReceptor { get; set; }
 
+    public string RegimenFiscalReceptor { get; set; }
     public string TipoDeFactura { get; set; }
     public string UsoDeFactura { get; set; }
     public DateTime FechaYHoraDeExpedicion { get; set; }
-    public string CP { get; set; }
+    public string CPEmisor { get; set; }
+    public string CPReceptor { get; set; }
     public string Moneda { get; set; }
     public string FormaDePago { get; set; }
     public string MetodoDePago { get; set; }

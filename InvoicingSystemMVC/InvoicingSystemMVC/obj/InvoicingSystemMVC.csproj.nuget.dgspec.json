@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\DotNet\\Dot Net Core\\AspDotNet\\InvoicingSystem\\InvoicingSystemMVC\\InvoicingSystemMVC\\InvoicingSystemMVC.csproj": {}
+    "C:\\DotNet\\Dot Net Core\\AspDotNet\\InvoicingSystem\\InvoicingSystem\\InvoicingSystemMVC\\InvoicingSystemMVC\\InvoicingSystemMVC.csproj": {}
   },
   "projects": {
-    "C:\\DotNet\\Dot Net Core\\AspDotNet\\InvoicingSystem\\InvoicingSystemMVC\\InvoicingSystemMVC\\InvoicingSystemMVC.csproj": {
+    "C:\\DotNet\\Dot Net Core\\AspDotNet\\InvoicingSystem\\InvoicingSystem\\InvoicingSystemMVC\\InvoicingSystemMVC\\InvoicingSystemMVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\DotNet\\Dot Net Core\\AspDotNet\\InvoicingSystem\\InvoicingSystemMVC\\InvoicingSystemMVC\\InvoicingSystemMVC.csproj",
+        "projectUniqueName": "C:\\DotNet\\Dot Net Core\\AspDotNet\\InvoicingSystem\\InvoicingSystem\\InvoicingSystemMVC\\InvoicingSystemMVC\\InvoicingSystemMVC.csproj",
         "projectName": "InvoicingSystemMVC",
-        "projectPath": "C:\\DotNet\\Dot Net Core\\AspDotNet\\InvoicingSystem\\InvoicingSystemMVC\\InvoicingSystemMVC\\InvoicingSystemMVC.csproj",
+        "projectPath": "C:\\DotNet\\Dot Net Core\\AspDotNet\\InvoicingSystem\\InvoicingSystem\\InvoicingSystemMVC\\InvoicingSystemMVC\\InvoicingSystemMVC.csproj",
         "packagesPath": "C:\\Users\\carlos\\.nuget\\packages\\",
-        "outputPath": "C:\\DotNet\\Dot Net Core\\AspDotNet\\InvoicingSystem\\InvoicingSystemMVC\\InvoicingSystemMVC\\obj\\",
+        "outputPath": "C:\\DotNet\\Dot Net Core\\AspDotNet\\InvoicingSystem\\InvoicingSystem\\InvoicingSystemMVC\\InvoicingSystemMVC\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

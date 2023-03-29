@@ -1,24 +1,28 @@
 ﻿using InvoicingSystemMVC.Controllers;
+using InvoicingSystemMVC.Models.Entities;
 using InvoicingSystemMVC.Models.Interfaces;
 
 namespace InvoicingSystemMVC.Models.Repositories;
 
 public class ContribuyenteRepository:IContribuyenteRepository
 {
-    private readonly IContribuyenteRepository _contribuyenteRepository;
     private readonly ApplicationDbContext _dbContext;
 
-    public ContribuyenteRepository(IContribuyenteRepository contribuyenteRepository, ApplicationDbContext dbContext)
+    public ContribuyenteRepository(ApplicationDbContext dbContext)
     {
-        _contribuyenteRepository = contribuyenteRepository;
         _dbContext = dbContext;
     }
     
-    public bool Add()
+    public bool Add(Contribuyente contribuyente)
     {
-        throw new NotImplementedException();
+        _dbContext.Add(contribuyente);
+        return Save();
     }
 
+    public async Task<Contribuyente> GetContribuyenteByRFC(string RFC)
+    {
+        return await _dbContext.Contribuyentes.FindAsync(RFC);
+    }
     public bool Delete()
     {
         throw new NotImplementedException();
@@ -31,6 +35,7 @@ public class ContribuyenteRepository:IContribuyenteRepository
 
     public bool Save()
     {
-        throw new NotImplementedException();
+        var saved = _dbContext.SaveChanges();
+        return saved >0 ? true : false;
     }
 }

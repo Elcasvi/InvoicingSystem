@@ -3,12 +3,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InvoicingSystemMVC.Models.Entities;
 
-public class Cliente
+public class ContribuyenteReceptor
 {
-    [Key] 
+    [Key]
     [Required]
-    [MaxLength(16),MinLength(16)]
+    [MaxLength(13), MinLength(13)]
     public string RFC { get; set; }
     [Required]
     public string RazonSocial { get; set; }
+    [Required]
+    public string RegimenFiscal { get; set; }
 }

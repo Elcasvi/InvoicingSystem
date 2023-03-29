@@ -11,5 +11,7 @@ public class ApplicationDbContext:DbContext
 
     public DbSet<Cliente> Clientes { get; set; }
     public DbSet<Contribuyente> Contribuyentes { get; set; }
+    public DbSet<ContribuyenteReceptor> ContribuyentesReceptores { get; set; }
+    public DbSet<ContribuyenteEmisor> ContribuyentesEmisores { get; set; }
     public DbSet<Factura> Facturas { get; set; }
 }

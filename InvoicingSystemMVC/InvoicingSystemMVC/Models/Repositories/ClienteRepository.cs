@@ -5,12 +5,10 @@ namespace InvoicingSystemMVC.Models.Repositories;
 
 public class ClienteRepository :IClienteRepository
 {
-    public readonly IClienteRepository _clienteRepository;
     public readonly ApplicationDbContext _DbContext;
 
-    public ClienteRepository(IClienteRepository clienteRepository, ApplicationDbContext dbContext)
+    public ClienteRepository(ApplicationDbContext dbContext)
     {
-        _clienteRepository = clienteRepository;
         _DbContext = dbContext;
     }
 

@@ -5,12 +5,11 @@ namespace InvoicingSystemMVC.Models.Repositories;
 
 public class FacturaRepository:IFacturaRepository
 {
-    private readonly IFacturaRepository _facturaRepository;
+    
     private readonly ApplicationDbContext _dbContext;
 
-    public FacturaRepository(IFacturaRepository facturaRepository, ApplicationDbContext dbContext)
+    public FacturaRepository(ApplicationDbContext dbContext)
     {
-        _facturaRepository = facturaRepository;
         _dbContext = dbContext;
     }
 
