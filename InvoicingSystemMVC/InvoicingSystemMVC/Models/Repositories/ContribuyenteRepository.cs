@@ -1,6 +1,8 @@
 ﻿using InvoicingSystemMVC.Controllers;
 using InvoicingSystemMVC.Models.Entities;
 using InvoicingSystemMVC.Models.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace InvoicingSystemMVC.Models.Repositories;
 
@@ -19,6 +21,11 @@ public class ContribuyenteRepository:IContribuyenteRepository
         return Save();
     }
 
+    public async Task<Contribuyente> GetContribuyenteByRFCAndPassword(string RFC,string password)
+    {
+        return await _dbContext.Contribuyentes.Where(c => c.RFC == RFC).Where(c => c.Password == password).FirstOrDefaultAsync();
+    }
+    
     public async Task<Contribuyente> GetContribuyenteByRFC(string RFC)
     {
         return await _dbContext.Contribuyentes.FindAsync(RFC);

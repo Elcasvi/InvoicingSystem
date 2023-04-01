@@ -19,5 +19,5 @@ public class Cliente
     
     public Contribuyente Contribuyente { get; set; }
     [ForeignKey("Contribuyente")]
-    public int ContribuyenteId { get; set; }
+    public string ContribuyenteRFC { get; set; }
 }

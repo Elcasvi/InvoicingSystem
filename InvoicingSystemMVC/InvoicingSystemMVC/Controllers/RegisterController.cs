@@ -27,8 +27,9 @@ public class RegisterController:Controller
         {
             return View(contribuyenteVM);
         }
-
+        Console.WriteLine("Antes de la llamada a la Db");
         var contribuyente =await _contribuyenteRepository.GetContribuyenteByRFC(contribuyenteVM.RFC);
+        Console.WriteLine("contribuyente: "+contribuyente);
         if (contribuyente!=null)
         {
             TempData["Error!"] = "Este contribuyente ya existe";
@@ -41,6 +42,11 @@ public class RegisterController:Controller
             RegimenFiscal = contribuyenteVM.RegimenFiscal,
             Password = contribuyenteVM.Password
         };
+        Console.WriteLine("newContribuyente: "+newContribuyente);
+
+        CookieOptions options = new CookieOptions();
+        Response.Cookies.Append("RFC",newContribuyente.RFC,options);
+        
         _contribuyenteRepository.Add(newContribuyente);
         return RedirectToAction("Index","Home");
     }

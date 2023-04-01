@@ -27,8 +27,9 @@ namespace InvoicingSystemMVC.Migrations
                     b.Property<string>("RFC")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("ContribuyenteId")
-                        .HasColumnType("int");
+                    b.Property<string>("ContribuyenteRFC")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(13)");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -44,27 +45,20 @@ namespace InvoicingSystemMVC.Migrations
 
                     b.HasKey("RFC");
 
-                    b.HasIndex("ContribuyenteId");
+                    b.HasIndex("ContribuyenteRFC");
 
                     b.ToTable("Clientes");
                 });
 
             modelBuilder.Entity("InvoicingSystemMVC.Models.Entities.Contribuyente", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    b.Property<string>("RFC")
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RFC")
-                        .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
 
                     b.Property<string>("RazonSocial")
                         .IsRequired()
@@ -74,7 +68,7 @@ namespace InvoicingSystemMVC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("RFC");
 
                     b.ToTable("Contribuyentes");
                 });
@@ -120,7 +114,10 @@ namespace InvoicingSystemMVC.Migrations
             modelBuilder.Entity("InvoicingSystemMVC.Models.Entities.Factura", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CPEmisor")
                         .IsRequired()
@@ -236,7 +233,7 @@ namespace InvoicingSystemMVC.Migrations
                 {
                     b.HasOne("InvoicingSystemMVC.Models.Entities.Contribuyente", "Contribuyente")
                         .WithMany()
-                        .HasForeignKey("ContribuyenteId")
+                        .HasForeignKey("ContribuyenteRFC")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

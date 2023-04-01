@@ -6,7 +6,7 @@ namespace InvoicingSystemMVC.Models.Entities;
 public class Factura
 {
     [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.None)]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
     
     public ContribuyenteEmisor ContribuyenteEmisor { get; set; }
