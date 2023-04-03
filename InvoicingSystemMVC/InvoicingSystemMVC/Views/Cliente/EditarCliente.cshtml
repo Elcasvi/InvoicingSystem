@@ -1,0 +1,22 @@
+﻿@model InvoicingSystemMVC.Models.ViewModels.EditarClienteViewModel
+
+<form method="post" asp-action="EditarCliente" enctype="multipart/form-data">
+    <input type="hidden" value="AddressId" id="AddressId" />
+    <div class="form-group">
+        <label asp-for="RFC">RFC</label>
+        <input asp-for="RFC" class="form-control" placeholder="Title">
+        <span asp-validation-for="RFC" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RazonSocial">RazonSocial</label>
+        <input asp-for="RazonSocial" class="form-control" placeholder="Description">
+        <span asp-validation-for="RazonSocial" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RegimenFiscal">RegimenFiscal</label>
+        <input asp-for="RegimenFiscal" class="form-control" placeholder="Description">
+        <span asp-validation-for="RegimenFiscal" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+

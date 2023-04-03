@@ -1,0 +1,20 @@
+﻿@model InvoicingSystemMVC.Models.ViewModels.EditarClienteViewModel
+<div>
+    <h1>¿Seguro que quieres eliminar este cliente?</h1>
+    <input type="hidden" value="AddressId" id="AddressId" />
+        <div class="card m-2">
+            <div class="card-header">
+                @Model.RFC
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@Model.RazonSocial</h5>
+                <p class="card-text">@Model.RegimenFiscal</p>
+            </div>
+        </div>
+        <div class="form-group">
+        <form action="Delete" method="post">
+            <input type="hidden" asp-for="RFC"/>
+            <input type="submit" value="Confirmar" class="btn btn-danger float-right mt-3"/>
+        </form>
+    </div>
+</div>
