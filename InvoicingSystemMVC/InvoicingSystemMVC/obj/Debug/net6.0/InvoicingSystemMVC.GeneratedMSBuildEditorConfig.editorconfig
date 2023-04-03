@@ -15,6 +15,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/DotNet/Dot Net Core/AspDotNet/InvoicingSystem/InvoicingSystem/InvoicingSystemMVC/InvoicingSystemMVC/Components/CrearFacturaComponent.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDcmVhckZhY3R1cmFDb21wb25lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/DotNet/Dot Net Core/AspDotNet/InvoicingSystem/InvoicingSystem/InvoicingSystemMVC/InvoicingSystemMVC/Components/ListarClientes.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMaXN0YXJDbGllbnRlcy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -37,6 +41,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/DotNet/Dot Net Core/AspDotNet/InvoicingSystem/InvoicingSystem/InvoicingSystemMVC/InvoicingSystemMVC/Views/Cliente/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/DotNet/Dot Net Core/AspDotNet/InvoicingSystem/InvoicingSystem/InvoicingSystemMVC/InvoicingSystemMVC/Views/Factura/CrearFactura.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmFjdHVyYVxDcmVhckZhY3R1cmEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/DotNet/Dot Net Core/AspDotNet/InvoicingSystem/InvoicingSystem/InvoicingSystemMVC/InvoicingSystemMVC/Views/Factura/Index.cshtml]

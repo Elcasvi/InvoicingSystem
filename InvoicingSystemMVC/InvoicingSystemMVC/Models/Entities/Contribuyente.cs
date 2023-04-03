@@ -17,4 +17,7 @@ public class Contribuyente
     public string Password { get; set; }
     [Required]
     public string RegimenFiscal { get; set; }
+    [Required]
+    public string CP { get; set; }
+    
 }

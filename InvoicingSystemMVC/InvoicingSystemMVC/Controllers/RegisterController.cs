@@ -40,6 +40,7 @@ public class RegisterController:Controller
             RFC = contribuyenteVM.RFC,
             RazonSocial = contribuyenteVM.RazonSocial,
             RegimenFiscal = contribuyenteVM.RegimenFiscal,
+            CP=contribuyenteVM.CP,
             Password = contribuyenteVM.Password
         };
         Console.WriteLine("newContribuyente: "+newContribuyente);

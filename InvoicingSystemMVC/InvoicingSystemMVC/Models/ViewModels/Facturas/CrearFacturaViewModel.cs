@@ -1,26 +1,21 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using InvoicingSystemMVC.Models.Entities;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace InvoicingSystemMVC.Models.Entities;
+namespace InvoicingSystemMVC.Models.ViewModels.Facturas;
 
-public class Factura
+public class CrearFacturaViewModel
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id { get; set; }
-    
-    public ContribuyenteEmisor ContribuyenteEmisor { get; set; }
-    [ForeignKey("ContribuyenteEmisor")]
-    public string RFCEmsior { get; set; }
-
-    public ContribuyenteReceptor ContribuyenteReceptor { get; set; }
-    [ForeignKey("ContribuyenteReceptor")]
-    public string RFCReceptor { get; set; }
+    public Contribuyente Contribuyente { get; set; }
+    public List<SelectListItem> Clientes { get; set; }
 
     public string RegimenFiscalReceptor { get; set; }
     public string TipoDeFactura { get; set; }
     public string UsoDeFactura { get; set; }
     public DateTime FechaYHoraDeExpedicion { get; set; }
+    public string CPEmisor { get; set; }
+    public string CPReceptor { get; set; }
     public string Moneda { get; set; }
     public string FormaDePago { get; set; }
     public string MetodoDePago { get; set; }

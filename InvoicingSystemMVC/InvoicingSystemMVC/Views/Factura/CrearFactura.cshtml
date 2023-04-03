@@ -1,0 +1,35 @@
+﻿
+@using InvoicingSystemMVC.Models.Entities
+@model InvoicingSystemMVC.Models.ViewModels.Facturas.CrearFacturaViewModel
+
+@{
+    
+}
+<h1>Hello from  Crear factura</h1>
+<div>
+    @if (TempData["Error"]!=null)
+           {
+               <div class="col-md-12 alert alert-danger">
+                   <span><b>Sorry!</b> - @TempData["Error"]</span>
+               </div>
+           } 
+    <div>
+        <form asp-action="CrearFactura">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Contribuyente" class="control-label"></label>
+                <label class="form-control">@Model.Contribuyente.RFC</label>
+                <input type="hidden" asp-for="Contribuyente">
+            </div>
+            <label asp-for="Clientes" class="control-label"></label>
+            <select asp-for="Clientes" asp-items="@Model.Clientes"class="form-control"></select>
+            <span asp-validation-for="Clientes" class="text-danger"></span>
+            
+            
+            <div class="form-group">
+                <input class="btn btn-outline-success float right" type="submit" value="Sign up" />
+            </div>
+        </form>
+    </div>
+</div>
+

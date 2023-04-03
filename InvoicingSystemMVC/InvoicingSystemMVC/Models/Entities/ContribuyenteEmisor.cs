@@ -12,6 +12,7 @@ namespace InvoicingSystemMVC.Models.Entities
         public string RazonSocial { get; set; }
         [Required]
         public string RegimenFiscal { get; set; }
-
+        [Required]
+        public string CP { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace InvoicingSystemMVC.Migrations
 {
-    public partial class InitDb : Migration
+    public partial class InitDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,7 +16,8 @@ namespace InvoicingSystemMVC.Migrations
                     RFC = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
                     RazonSocial = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RegimenFiscal = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    RegimenFiscal = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CP = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,7 +30,8 @@ namespace InvoicingSystemMVC.Migrations
                 {
                     RFC = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
                     RazonSocial = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RegimenFiscal = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    RegimenFiscal = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CP = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -81,8 +83,6 @@ namespace InvoicingSystemMVC.Migrations
                     TipoDeFactura = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UsoDeFactura = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FechaYHoraDeExpedicion = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CPEmisor = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CPReceptor = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Moneda = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FormaDePago = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MetodoDePago = table.Column<string>(type: "nvarchar(max)", nullable: false),
