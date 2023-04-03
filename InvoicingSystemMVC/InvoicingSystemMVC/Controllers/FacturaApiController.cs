@@ -3,19 +3,20 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace InvoicingSystemMVC.Controllers;
 
-//[Route("api/[Controller]")]
-public class FacturaController:Controller
+
+[Route("/{Controller}")]
+public class FacturaApiController:ControllerBase
 {
     private readonly IClienteRepository _clienteRepository;
 
-    public FacturaController(IClienteRepository clienteRepository)
+    public FacturaApiController(IClienteRepository clienteRepository)
     {
         _clienteRepository = clienteRepository;
     }
-    
-    public async Task<IActionResult> Index()
+    [HttpGet]
+    public async Task<IActionResult> Get()
     {
         var clientes=await _clienteRepository.GetAllClientes();
-        return View(clientes);
+        return Ok(clientes);
     }
 }

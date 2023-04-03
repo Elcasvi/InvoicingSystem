@@ -1,1 +1,4 @@
+@using InvoicingSystemMVC.Components
+@model IEnumerable<InvoicingSystemMVC.Models.Entities.Cliente>
 <h1>Hello from factura</h1>
+@(await Html.RenderComponentAsync<ListarClientes>(RenderMode.ServerPrerendered, new { Clientes = Model }))

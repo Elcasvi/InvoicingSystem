@@ -1,0 +1,18 @@
+﻿@using InvoicingSystemMVC.Models.Entities
+<h3>ListarClientes</h3>
+@foreach (Cliente cliente in Clientes)
+{
+    <h1>@cliente.RFC</h1>
+}
+@counter
+<button class="btn btn-primary" @onclick="IncrementCounter">Counter++</button>
+@code {
+    [Parameter]
+    public IEnumerable<Cliente> Clientes { get; set; }
+
+    public int counter = 0;
+    public void IncrementCounter()
+    {
+        counter++;
+    }
+} 
