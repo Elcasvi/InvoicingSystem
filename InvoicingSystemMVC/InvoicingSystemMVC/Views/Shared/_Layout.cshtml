@@ -1,5 +1,4 @@
-﻿@using Microsoft.EntityFrameworkCore.Metadata.Internal
-@inject IHttpContextAccessor httpContextaccessor
+﻿@inject IHttpContextAccessor httpContextaccessor
 @{
     bool user = false;
     string RFC = "";
@@ -41,7 +40,13 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>                        
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Index">Clientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Factura" asp-action="Index">Facturas</a>
+                        </li>    
                     }
                     else
                     {

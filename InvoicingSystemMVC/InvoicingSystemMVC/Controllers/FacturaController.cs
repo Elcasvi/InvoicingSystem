@@ -1,18 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using InvoicingSystemMVC.Models.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace InvoicingSystemMVC.Controllers;
 
-public class FacturaController:Controller
+[Route("api/[Controller]")]
+public class FacturaController:ControllerBase
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly IClienteRepository _clienteRepository;
 
-    public FacturaController(ILogger<HomeController> logger)
+    public FacturaController(IClienteRepository clienteRepository)
     {
-        _logger = logger;
+        _clienteRepository = clienteRepository;
     }
-
-    public IActionResult Index()
+    
+    [HttpGet]
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var clientes=await _clienteRepository.GetAllClientes();
+        return Ok(clientes);
     }
 }

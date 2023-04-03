@@ -1,5 +1,7 @@
 ﻿using InvoicingSystemMVC.Controllers;
+using InvoicingSystemMVC.Models.Entities;
 using InvoicingSystemMVC.Models.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace InvoicingSystemMVC.Models.Repositories;
 
@@ -12,23 +14,36 @@ public class ClienteRepository :IClienteRepository
         _DbContext = dbContext;
     }
 
-    public bool Add()
+    public async Task<Cliente> GetClienteByRFC(string RFC)
     {
-        throw new NotImplementedException();
+        return await _DbContext.Clientes.FindAsync(RFC);
     }
 
-    public bool Delete()
+    public async Task<IEnumerable<Cliente>> GetAllClientes()
     {
-        throw new NotImplementedException();
+        return await _DbContext.Clientes.ToListAsync();
+    }
+    public bool Add(Cliente cliente)
+    {
+        _DbContext.Clientes.Add(cliente);
+        return Save();
     }
 
-    public bool Update()
+    public bool Delete(Cliente cliente)
     {
-        throw new NotImplementedException();
+        _DbContext.Clientes.Remove(cliente);
+        return Save();
+    }
+
+    public bool Update(Cliente cliente)
+    {
+        _DbContext.Clientes.Update(cliente);
+        return Save();
     }
 
     public bool Save()
     {
-        throw new NotImplementedException();
+        var saved = _DbContext.SaveChanges();
+        return saved >0 ? true : false;
     }
 }

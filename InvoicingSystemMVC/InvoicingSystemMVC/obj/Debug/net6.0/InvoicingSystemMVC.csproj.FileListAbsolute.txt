@@ -134,3 +134,7 @@ C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystem
 C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC\obj\Debug\net6.0\InvoicingSystemMVC.pdb
 C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC\obj\Debug\net6.0\InvoicingSystemMVC.genruntimeconfig.cache
 C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC\obj\Debug\net6.0\ref\InvoicingSystemMVC.dll
+C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC\bin\Debug\net6.0\Microsoft.AspNetCore.Authorization.dll
+C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC\bin\Debug\net6.0\Microsoft.AspNetCore.Components.dll
+C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC\bin\Debug\net6.0\Microsoft.AspNetCore.Metadata.dll
+C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll

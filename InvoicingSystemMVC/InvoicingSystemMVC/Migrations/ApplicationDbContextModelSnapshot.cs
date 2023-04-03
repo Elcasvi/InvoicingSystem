@@ -31,10 +31,6 @@ namespace InvoicingSystemMVC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(13)");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("RazonSocial")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
