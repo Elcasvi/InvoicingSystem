@@ -7,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<IClienteRepository,ClienteRepository>();
 builder.Services.AddScoped<IContribuyenteRepository,ContribuyenteRepository>();
 builder.Services.AddScoped<IFacturaRepository,FacturaRepository>();
@@ -33,10 +35,12 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-
+app.UseEndpoints(endpoints =>
+{
+    // This is the line you need to add
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+    endpoints.MapBlazorHub();
+});
 app.Run();
