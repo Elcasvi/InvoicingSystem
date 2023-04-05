@@ -27,6 +27,7 @@ public class FacturaController:Controller
         string RFC=Request.Cookies["RFC"];
         Contribuyente contribuyente = await _contribuyenteRepository.GetContribuyenteByRFC(RFC);
         IEnumerable<Cliente> clientes = await _clienteRepository.GetAllClientes();
+        
         List<Cliente>clientesLista =clientes.ToList();
         List<SelectListItem> clientesItems = clientesLista.ConvertAll(d =>
         {
@@ -34,7 +35,6 @@ public class FacturaController:Controller
             {
                 Text=d.RFC.ToString(),
                 Value = d.RFC,
-                Selected = false
             };
         });
             
@@ -45,5 +45,59 @@ public class FacturaController:Controller
         };
         
         return View(facturaVM);
+    }
+
+    [HttpPost]
+    public async  Task<IActionResult> CrearFactura(CrearFacturaViewModel facturaVM)
+    {
+     
+     
+     Contribuyente contribuyente = await _contribuyenteRepository.GetContribuyenteByRFC(facturaVM.Contribuyente.RFC);
+     Cliente cliente = await _clienteRepository.GetClienteByRFC(facturaVM.Cliente.RFC);
+     ContribuyenteEmisor contribuyenteEmisor = new ContribuyenteEmisor()
+     {
+         RFC=contribuyente.RFC,
+         RazonSocial =contribuyente.RazonSocial,
+         RegimenFiscal = contribuyente.RegimenFiscal,
+         CP = contribuyente.CP
+     };
+     ContribuyenteReceptor contribuyenteReceptor = new ContribuyenteReceptor()
+     {
+         RFC=cliente.RFC,
+         RazonSocial =cliente.RazonSocial,
+         RegimenFiscal = cliente.RegimenFiscal
+     };
+     
+     Factura factura = new Factura()
+     {
+         ContribuyenteEmisor = contribuyenteEmisor,
+         RFCEmsior = contribuyenteEmisor.RFC,
+         ContribuyenteReceptor = contribuyenteReceptor,
+         RFCReceptor = contribuyenteReceptor.RFC,
+         TipoDeFactura = facturaVM.TipoDeFactura,
+         UsoDeFactura = facturaVM.UsoDeFactura,
+         FechaHoraDeExpedicion = DateTime.Now,
+         Moneda = facturaVM.Moneda,
+         FormaDePago = facturaVM.FormaDePago,
+         MetodoDePago = facturaVM.MetodoDePago,
+         Serie = facturaVM.Serie,
+         Folio = facturaVM.Folio,
+         CondicionesDePago= facturaVM.CondicionesDePago,
+         ClaveDeProductoOServicio= facturaVM.ClaveDeProductoOServicio,
+         ClaveDeUnidad = facturaVM.ClaveDeUnidad,
+         Cantidad= facturaVM.Cantidad,
+         Unidad = facturaVM.Unidad,
+         NumeroDeIdentificacion = facturaVM.NumeroDeIdentificacion,
+         Descripcion = facturaVM.Descripcion,
+         ValorUnitario = facturaVM.ValorUnitario,
+         TieneIVA = facturaVM.TieneIVA,
+         TasaIVA = facturaVM.TasaIVA,
+         TotalIVA =facturaVM.TotalIVA,
+         SubtotalFactura = facturaVM.SubtotalFactura,
+         DescuentoFactura = facturaVM.DescuentoFactura,
+         TotalFactura = facturaVM.TotalFactura,
+     };
+     
+     return RedirectToAction("Index", "Factura");
     }
 }

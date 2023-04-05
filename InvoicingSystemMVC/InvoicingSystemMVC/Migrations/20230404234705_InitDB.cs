@@ -79,10 +79,9 @@ namespace InvoicingSystemMVC.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RFCEmsior = table.Column<string>(type: "nvarchar(13)", nullable: false),
                     RFCReceptor = table.Column<string>(type: "nvarchar(13)", nullable: false),
-                    RegimenFiscalReceptor = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TipoDeFactura = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UsoDeFactura = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FechaYHoraDeExpedicion = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FechaHoraDeExpedicion = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Moneda = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FormaDePago = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MetodoDePago = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -91,7 +90,7 @@ namespace InvoicingSystemMVC.Migrations
                     CondicionesDePago = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaveDeProductoOServicio = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ClaveDeUnidad = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Cantidad = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Cantidad = table.Column<int>(type: "int", nullable: false),
                     Unidad = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NumeroDeIdentificacion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -101,8 +100,7 @@ namespace InvoicingSystemMVC.Migrations
                     TotalIVA = table.Column<float>(type: "real", nullable: false),
                     SubtotalFactura = table.Column<float>(type: "real", nullable: false),
                     DescuentoFactura = table.Column<float>(type: "real", nullable: true),
-                    TotalFactura = table.Column<float>(type: "real", nullable: false),
-                    StatusDeFactura = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    TotalFactura = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {

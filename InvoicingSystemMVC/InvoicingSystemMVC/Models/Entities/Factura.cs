@@ -16,11 +16,10 @@ public class Factura
     public ContribuyenteReceptor ContribuyenteReceptor { get; set; }
     [ForeignKey("ContribuyenteReceptor")]
     public string RFCReceptor { get; set; }
-
-    public string RegimenFiscalReceptor { get; set; }
+    
     public string TipoDeFactura { get; set; }
     public string UsoDeFactura { get; set; }
-    public DateTime FechaYHoraDeExpedicion { get; set; }
+    public DateTime FechaHoraDeExpedicion { get; set; }
     public string Moneda { get; set; }
     public string FormaDePago { get; set; }
     public string MetodoDePago { get; set; }
@@ -30,7 +29,7 @@ public class Factura
     //public string? FacturaRelacionada { get; set; }
     public string ClaveDeProductoOServicio { get; set; }
     public string ClaveDeUnidad { get; set; }
-    public string Cantidad{ get; set; }
+    public int Cantidad{ get; set; }
     public string Unidad { get; set; }
     public string NumeroDeIdentificacion { get; set; }
     public string Descripcion { get; set; }
@@ -41,5 +40,5 @@ public class Factura
     public float SubtotalFactura { get; set; }
     public float? DescuentoFactura { get; set; }
     public float TotalFactura { get; set; }
-    public string StatusDeFactura{ get; set; }
+    //public string StatusDeFactura{ get; set; }
 }

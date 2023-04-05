@@ -123,9 +123,8 @@ namespace InvoicingSystemMVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Cantidad")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
 
                     b.Property<string>("ClaveDeProductoOServicio")
                         .IsRequired()
@@ -145,7 +144,7 @@ namespace InvoicingSystemMVC.Migrations
                     b.Property<float?>("DescuentoFactura")
                         .HasColumnType("real");
 
-                    b.Property<DateTime>("FechaYHoraDeExpedicion")
+                    b.Property<DateTime>("FechaHoraDeExpedicion")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Folio")
@@ -175,15 +174,7 @@ namespace InvoicingSystemMVC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(13)");
 
-                    b.Property<string>("RegimenFiscalReceptor")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Serie")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StatusDeFactura")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("SubtotalFactura")
