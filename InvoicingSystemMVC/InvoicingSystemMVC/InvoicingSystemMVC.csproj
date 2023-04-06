@@ -18,11 +18,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Helpers" />
+      <_ContentIncludedByDefault Remove="Components\Component.razor" />
     </ItemGroup>
 
     <ItemGroup>
-      <_ContentIncludedByDefault Remove="Components\Component.razor" />
+      <Folder Include="Helpers" />
     </ItemGroup>
 
 </Project>

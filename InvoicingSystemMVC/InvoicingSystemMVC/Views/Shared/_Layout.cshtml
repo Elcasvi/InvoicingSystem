@@ -61,7 +61,7 @@
         </div>
         @if(user){
             <div>@RFC</div>
-            <a class="nav-link text-dark" asp-area="" asp-controller="Logout" asp-action="Index">Logout</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Logout" asp-action="Index"asp-route-RFC=@RFC>Logout</a>
         }
     </nav>
 </header>
