@@ -11,13 +11,15 @@ public class FacturaController:Controller
 {
     private readonly IContribuyenteRepository _contribuyenteRepository;
     private readonly IClienteRepository _clienteRepository;
+    private readonly IFacturaRepository _facturaRepository;
 
-    public FacturaController(IContribuyenteRepository contribuyenteRepository,IClienteRepository clienteRepository)
+    public FacturaController(IContribuyenteRepository contribuyenteRepository, IClienteRepository clienteRepository, IFacturaRepository facturaRepository)
     {
         _contribuyenteRepository = contribuyenteRepository;
         _clienteRepository = clienteRepository;
+        _facturaRepository = facturaRepository;
     }
-    
+
     public async Task<IActionResult> Index()
     {
         return View();
@@ -68,6 +70,8 @@ public class FacturaController:Controller
          RegimenFiscal = cliente.RegimenFiscal
      };
      
+     
+     DateTime fechaYHora=DateTime.Now;
      Factura factura = new Factura()
      {
          ContribuyenteEmisor = contribuyenteEmisor,
@@ -76,27 +80,40 @@ public class FacturaController:Controller
          RFCReceptor = contribuyenteReceptor.RFC,
          TipoDeFactura = facturaVM.TipoDeFactura,
          UsoDeFactura = facturaVM.UsoDeFactura,
-         FechaHoraDeExpedicion = DateTime.Now,
+         FechaHoraDeExpedicion = fechaYHora,
          Moneda = facturaVM.Moneda,
          FormaDePago = facturaVM.FormaDePago,
          MetodoDePago = facturaVM.MetodoDePago,
          Serie = facturaVM.Serie,
          Folio = facturaVM.Folio,
          CondicionesDePago= facturaVM.CondicionesDePago,
-         ClaveDeProductoOServicio= facturaVM.ClaveDeProductoOServicio,
-         ClaveDeUnidad = facturaVM.ClaveDeUnidad,
-         Cantidad= facturaVM.Cantidad,
-         Unidad = facturaVM.Unidad,
-         NumeroDeIdentificacion = facturaVM.NumeroDeIdentificacion,
-         Descripcion = facturaVM.Descripcion,
-         ValorUnitario = facturaVM.ValorUnitario,
-         TieneIVA = facturaVM.TieneIVA,
-         TasaIVA = facturaVM.TasaIVA,
-         TotalIVA =facturaVM.TotalIVA,
          SubtotalFactura = facturaVM.SubtotalFactura,
          DescuentoFactura = facturaVM.DescuentoFactura,
          TotalFactura = facturaVM.TotalFactura,
      };
+     //_facturaRepository.Add();
+     //_facturaRepository.Get();
+     
+     
+     foreach (ConceptoViewModel conceptoVM in facturaVM.ConceptosViewModel)
+     {
+         Concepto nuevoConcepto = new Concepto()
+         {
+             //Factura =
+             //FacturaId = 
+             ClaveDeProductoOServicio = conceptoVM.ClaveDeProductoOServicio,
+             ClaveDeUnidad = conceptoVM.ClaveDeUnidad,
+             Cantidad = conceptoVM.Cantidad,
+             Unidad = conceptoVM.Unidad,
+             NumeroDeIdentificacion = conceptoVM.NumeroDeIdentificacion,
+             Descripcion = conceptoVM.Descripcion,
+             ValorUnitario = conceptoVM.ValorUnitario,
+             TieneIVA = conceptoVM.TieneIVA,
+             TasaIVA = conceptoVM.TasaIVA,
+             TotalIVA = conceptoVM.TotalIVA,
+         };
+         //_conceptoRepository.Add
+     }
      
      return RedirectToAction("Index", "Factura");
     }

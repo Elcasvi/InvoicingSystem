@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace InvoicingSystemMVC.Migrations
 {
-    public partial class InitDB : Migration
+    public partial class InitDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -88,16 +88,6 @@ namespace InvoicingSystemMVC.Migrations
                     Serie = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Folio = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CondicionesDePago = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaveDeProductoOServicio = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ClaveDeUnidad = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Cantidad = table.Column<int>(type: "int", nullable: false),
-                    Unidad = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NumeroDeIdentificacion = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ValorUnitario = table.Column<float>(type: "real", nullable: false),
-                    TieneIVA = table.Column<bool>(type: "bit", nullable: false),
-                    TasaIVA = table.Column<float>(type: "real", nullable: false),
-                    TotalIVA = table.Column<float>(type: "real", nullable: false),
                     SubtotalFactura = table.Column<float>(type: "real", nullable: false),
                     DescuentoFactura = table.Column<float>(type: "real", nullable: true),
                     TotalFactura = table.Column<float>(type: "real", nullable: false)
@@ -119,10 +109,44 @@ namespace InvoicingSystemMVC.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Conceptos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FacturaId = table.Column<int>(type: "int", nullable: false),
+                    ClaveDeProductoOServicio = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ClaveDeUnidad = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Cantidad = table.Column<int>(type: "int", nullable: false),
+                    Unidad = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NumeroDeIdentificacion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ValorUnitario = table.Column<float>(type: "real", nullable: false),
+                    TieneIVA = table.Column<bool>(type: "bit", nullable: false),
+                    TasaIVA = table.Column<float>(type: "real", nullable: false),
+                    TotalIVA = table.Column<float>(type: "real", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Conceptos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Conceptos_Facturas_FacturaId",
+                        column: x => x.FacturaId,
+                        principalTable: "Facturas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Clientes_ContribuyenteRFC",
                 table: "Clientes",
                 column: "ContribuyenteRFC");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Conceptos_FacturaId",
+                table: "Conceptos",
+                column: "FacturaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Facturas_RFCEmsior",
@@ -141,10 +165,13 @@ namespace InvoicingSystemMVC.Migrations
                 name: "Clientes");
 
             migrationBuilder.DropTable(
-                name: "Facturas");
+                name: "Conceptos");
 
             migrationBuilder.DropTable(
                 name: "Contribuyentes");
+
+            migrationBuilder.DropTable(
+                name: "Facturas");
 
             migrationBuilder.DropTable(
                 name: "ContribuyentesEmisores");

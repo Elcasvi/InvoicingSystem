@@ -46,6 +46,59 @@ namespace InvoicingSystemMVC.Migrations
                     b.ToTable("Clientes");
                 });
 
+            modelBuilder.Entity("InvoicingSystemMVC.Models.Entities.Concepto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClaveDeProductoOServicio")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaveDeUnidad")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FacturaId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NumeroDeIdentificacion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("TasaIVA")
+                        .HasColumnType("real");
+
+                    b.Property<bool>("TieneIVA")
+                        .HasColumnType("bit");
+
+                    b.Property<float>("TotalIVA")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Unidad")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("ValorUnitario")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FacturaId");
+
+                    b.ToTable("Conceptos");
+                });
+
             modelBuilder.Entity("InvoicingSystemMVC.Models.Entities.Contribuyente", b =>
                 {
                     b.Property<string>("RFC")
@@ -123,22 +176,7 @@ namespace InvoicingSystemMVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("Cantidad")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ClaveDeProductoOServicio")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaveDeUnidad")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CondicionesDePago")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<float?>("DescuentoFactura")
@@ -162,10 +200,6 @@ namespace InvoicingSystemMVC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NumeroDeIdentificacion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("RFCEmsior")
                         .IsRequired()
                         .HasColumnType("nvarchar(13)");
@@ -180,12 +214,6 @@ namespace InvoicingSystemMVC.Migrations
                     b.Property<float>("SubtotalFactura")
                         .HasColumnType("real");
 
-                    b.Property<float>("TasaIVA")
-                        .HasColumnType("real");
-
-                    b.Property<bool>("TieneIVA")
-                        .HasColumnType("bit");
-
                     b.Property<string>("TipoDeFactura")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -193,19 +221,9 @@ namespace InvoicingSystemMVC.Migrations
                     b.Property<float>("TotalFactura")
                         .HasColumnType("real");
 
-                    b.Property<float>("TotalIVA")
-                        .HasColumnType("real");
-
-                    b.Property<string>("Unidad")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("UsoDeFactura")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("ValorUnitario")
-                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
@@ -225,6 +243,17 @@ namespace InvoicingSystemMVC.Migrations
                         .IsRequired();
 
                     b.Navigation("Contribuyente");
+                });
+
+            modelBuilder.Entity("InvoicingSystemMVC.Models.Entities.Concepto", b =>
+                {
+                    b.HasOne("InvoicingSystemMVC.Models.Entities.Factura", "Factura")
+                        .WithMany()
+                        .HasForeignKey("FacturaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Factura");
                 });
 
             modelBuilder.Entity("InvoicingSystemMVC.Models.Entities.Factura", b =>
