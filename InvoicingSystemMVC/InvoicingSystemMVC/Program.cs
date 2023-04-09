@@ -43,4 +43,5 @@ app.UseEndpoints(endpoints =>
         pattern: "{controller=Home}/{action=Index}/{id?}");
     endpoints.MapBlazorHub();
 });
+app.MapFallbackToController("Blazor", "Home");
 app.Run();
