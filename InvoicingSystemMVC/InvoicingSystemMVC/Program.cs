@@ -1,4 +1,6 @@
 using InvoicingSystemMVC.Controllers;
+using InvoicingSystemMVC.Controllers.Api.Services;
+using InvoicingSystemMVC.Controllers.Api.Services.Interfaces;
 using InvoicingSystemMVC.Models.Interfaces;
 using InvoicingSystemMVC.Models.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -12,11 +14,23 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<IClienteRepository,ClienteRepository>();
 builder.Services.AddScoped<IContribuyenteRepository,ContribuyenteRepository>();
 builder.Services.AddScoped<IFacturaRepository,FacturaRepository>();
+builder.Services.AddScoped<IClienteService,ClienteService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddCors(opciones =>
+{
+    opciones.AddPolicy("nuevaPolitica", app =>
+    {
+        app.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
+builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7060") });
 
 var app = builder.Build();
 

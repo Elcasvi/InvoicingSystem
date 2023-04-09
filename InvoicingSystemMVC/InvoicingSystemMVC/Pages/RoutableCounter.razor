@@ -1,4 +1,7 @@
 ﻿@page "/RoutableCounter"
+@using InvoicingSystemMVC.Models.Entities
+@using InvoicingSystemMVC.Controllers.Api.Services.Interfaces
+@inject IClienteService ClienteService;
 
 <PageTitle>Routable Counter</PageTitle>
 
@@ -14,5 +17,23 @@
     private void IncrementCount()
     {
         currentCount++;
+    }
+
+    public List<Cliente> clientes = new List<Cliente>();
+     
+    protected override async Task OnInitializedAsync()
+    {
+        clientes = await ClienteService.Clientes();
+        foreach (var VARIABLE in clientes)
+        {
+            Console.WriteLine(VARIABLE.RFC);
+        }
+    //base.OnInitialized();
+    }
+    
+
+    private async Task GetClientes()
+    {
+        
     }
 }
