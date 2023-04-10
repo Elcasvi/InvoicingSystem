@@ -43,7 +43,7 @@ namespace InvoicingSystemMVC.Migrations
 
                     b.HasIndex("ContribuyenteRFC");
 
-                    b.ToTable("Clientes");
+                    b.ToTable("GetClientes");
                 });
 
             modelBuilder.Entity("InvoicingSystemMVC.Models.Entities.Concepto", b =>

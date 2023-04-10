@@ -1,8 +1,10 @@
-﻿namespace InvoicingSystemMVC.Models.Interfaces;
+﻿using InvoicingSystemMVC.Models.Entities;
+
+namespace InvoicingSystemMVC.Models.Interfaces;
 
 public interface IFacturaRepository
 {
-    public bool Add();
+    public bool Add(Factura factura);
     public bool Delete();
     public bool Update();
     public bool Save();

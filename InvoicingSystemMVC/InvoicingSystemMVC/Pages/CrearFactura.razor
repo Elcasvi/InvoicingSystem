@@ -1,0 +1,50 @@
+﻿@page "/CrearFactura"
+@using InvoicingSystemMVC.Models.Entities
+@using InvoicingSystemMVC.Controllers.Api.Services.Interfaces
+@using InvoicingSystemMVC.Models.ViewModels.Facturas
+@inject IHttpContextAccessor httpContextaccessor
+@inject IClienteService ClienteService;
+@inject IFacturaService FacturaService;
+@inject IContribuyenteService ContribuyenteService;
+@inject NavigationManager NavManager
+
+
+<PageTitle>Nueva Factura</PageTitle>
+
+<h1>Nueva Factura</h1>
+
+
+@code {
+    
+    private CrearFacturaViewModel facturaViewModel = new CrearFacturaViewModel();
+    private List<Cliente> clientes = new List<Cliente>();
+    private Contribuyente contribuyente = new Contribuyente();
+    
+    private string GetRFCFromCookies()
+    {
+        string RFC = "";
+        foreach (var cookie in httpContextaccessor.HttpContext.Request.Cookies)
+        {
+            if (cookie.Key.Equals("RFC"))
+            {
+                RFC = cookie.Value;
+                break;
+            }
+        }
+        return RFC;
+    }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        string RFC=GetRFCFromCookies();
+        contribuyente = await ContribuyenteService.GetContribuyente(RFC);
+        clientes = await ClienteService.GetClientes();
+    }
+    
+    
+    private async void PostFactura(Factura factura)
+    {
+        var post = await FacturaService.PostFactura(factura);
+        NavManager.NavigateTo("/");
+    }
+}

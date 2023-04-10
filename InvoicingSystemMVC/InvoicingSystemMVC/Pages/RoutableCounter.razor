@@ -23,7 +23,7 @@
      
     protected override async Task OnInitializedAsync()
     {
-        clientes = await ClienteService.Clientes();
+        clientes = await ClienteService.GetClientes();
         foreach (var VARIABLE in clientes)
         {
             Console.WriteLine(VARIABLE.RFC);

@@ -1,4 +1,5 @@
 ﻿using InvoicingSystemMVC.Controllers;
+using InvoicingSystemMVC.Models.Entities;
 using InvoicingSystemMVC.Models.Interfaces;
 
 namespace InvoicingSystemMVC.Models.Repositories;
@@ -13,9 +14,10 @@ public class FacturaRepository:IFacturaRepository
         _dbContext = dbContext;
     }
 
-    public bool Add()
+    public bool Add(Factura factura)
     {
-        throw new NotImplementedException();
+        _dbContext.Facturas.Add(factura);
+        return Save();
     }
 
     public bool Delete()
@@ -30,6 +32,7 @@ public class FacturaRepository:IFacturaRepository
 
     public bool Save()
     {
-        throw new NotImplementedException();
+        var saved = _dbContext.SaveChanges();
+        return saved >0 ? true : false;
     }
 }

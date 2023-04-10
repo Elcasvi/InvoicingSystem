@@ -1,4 +1,5 @@
-﻿using InvoicingSystemMVC.Models.Interfaces;
+﻿using InvoicingSystemMVC.Models.Entities;
+using InvoicingSystemMVC.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InvoicingSystemMVC.Controllers.Api;
@@ -13,12 +14,12 @@ public class ApiContribuyenteController:ControllerBase
         _contribuyenteRepository = contribuyenteRepository;
     }
 
-    //GET: ApiFactura/Clientes
-    [HttpGet]
-    public async Task<IActionResult> GetContribuyente()
+    //GET: ApiFactura/GetContribuyente
+    [HttpGet("{RFC}",Name = "GetContribuyente")]
+    public async Task<IActionResult> GetContribuyente(string RFC)
     {
-        string rfcContribuyente = Request.Cookies["RFC"];
-        var contribuyente = await _contribuyenteRepository.GetContribuyenteByRFC(rfcContribuyente);
+        Contribuyente contribuyente = await _contribuyenteRepository.GetContribuyenteByRFC(RFC);
+        Console.WriteLine("Contribuyente: "+contribuyente);
         return Ok(contribuyente);
     }
     

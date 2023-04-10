@@ -1,4 +1,5 @@
-﻿using InvoicingSystemMVC.Models.Interfaces;
+﻿using InvoicingSystemMVC.Models.Entities;
+using InvoicingSystemMVC.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 namespace InvoicingSystemMVC.Controllers.Api;
 
@@ -6,14 +7,14 @@ namespace InvoicingSystemMVC.Controllers.Api;
 [ApiController]
 public class ApiFacturaController:ControllerBase
 {
-    private readonly IClienteRepository _clienteRepository;
+    private readonly IFacturaRepository _facturaRepository;
 
-    public ApiFacturaController(IClienteRepository clienteRepository)
+    public ApiFacturaController(IFacturaRepository facturaRepository)
     {
-        _clienteRepository = clienteRepository;
+        _facturaRepository = facturaRepository;
     }
 
-    //GET: ApiFactura/Clientes
+    //GET: ApiFactura/GetClientes
     [HttpGet]
     public async Task<IActionResult> GetClientes()
     {
@@ -21,8 +22,9 @@ public class ApiFacturaController:ControllerBase
     }
     //POST: ApiFactura
     [HttpPost]
-    public async Task<IActionResult> Post()
+    public async Task<IActionResult> Post([FromBody]Factura factura)
     {
+        bool res=_facturaRepository.Add(factura);
         return Ok();
     }
 }

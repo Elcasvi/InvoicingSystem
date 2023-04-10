@@ -52,7 +52,7 @@ namespace InvoicingSystemMVC.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Clientes",
+                name: "GetClientes",
                 columns: table => new
                 {
                     RFC = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -140,7 +140,7 @@ namespace InvoicingSystemMVC.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Clientes_ContribuyenteRFC",
-                table: "Clientes",
+                table: "GetClientes",
                 column: "ContribuyenteRFC");
 
             migrationBuilder.CreateIndex(
@@ -162,7 +162,7 @@ namespace InvoicingSystemMVC.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Clientes");
+                name: "GetClientes");
 
             migrationBuilder.DropTable(
                 name: "Conceptos");

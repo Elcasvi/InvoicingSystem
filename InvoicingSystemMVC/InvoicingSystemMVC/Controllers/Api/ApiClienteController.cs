@@ -13,7 +13,7 @@ public class ApiClienteController:ControllerBase
         _clienteRepository = clienteRepository;
     }
 
-    //GET: ApiFactura/Clientes
+    //GET: ApiFactura/GetClientes
     [HttpGet]
     public async Task<IActionResult> GetClientes()
     {
@@ -21,7 +21,7 @@ public class ApiClienteController:ControllerBase
         return Ok(clientes);
     }
     
-    //GET: ApiFactura/Clientes/5
+    //GET: ApiFactura/GetClientes/5
     [HttpGet("{RFC}",Name = "GetClientes")]
     public async Task<IActionResult> GetClientes(string RFC)
     {
