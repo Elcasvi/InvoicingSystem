@@ -19,7 +19,7 @@ public class ApiContribuyenteController:ControllerBase
     public async Task<IActionResult> GetContribuyente(string RFC)
     {
         Contribuyente contribuyente = await _contribuyenteRepository.GetContribuyenteByRFC(RFC);
-        Console.WriteLine("Contribuyente: "+contribuyente);
+        Console.WriteLine("Contribuyente: "+contribuyente.RFC);
         return Ok(contribuyente);
     }
     

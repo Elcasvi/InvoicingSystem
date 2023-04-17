@@ -12,14 +12,64 @@
 <PageTitle>Nueva Factura</PageTitle>
 
 <h1>Nueva Factura</h1>
+<p>@facturaViewModel.Contribuyente.RFC</p>
+<form>
+    <div class="m-2 p-2">
+        <label>Contribuyente:</label>
+        <label>@facturaViewModel.Contribuyente.RFC</label>
+        <input type="hidden" @bind="facturaViewModel.Contribuyente.RFC">
+        
+        <select @bind="facturaViewModel.Cliente.RFC">
+            @foreach (Cliente cliente in facturaViewModel.Clientes)
+            {
+                <option value="@cliente">@cliente.RFC</option>
+            }
+        </select>
+    </div>
+    <div class="m-2 p-2">
+            <label>Tipo de factura:</label>
+            <input @bind="facturaViewModel.TipoDeFactura">
+            
+            <label>Uso de factura de factura:</label>
+            <input @bind="facturaViewModel.UsoDeFactura">
+            
+            <label>Moneda:</label>
+            <input @bind="facturaViewModel.Moneda">
+            
+            <label>Forma de Pago:</label>
+            <input @bind="facturaViewModel.FormaDePago">
+            
+            <label>Metodo de Pago:</label>
+            <input @bind="facturaViewModel.MetodoDePago">
+            
+            <label>Serie:</label>
+            <input @bind="facturaViewModel.Serie">
+            
+            <label>Folio:</label>
+            <input @bind="facturaViewModel.Folio">
+            
+            <label>Condiciones de Pago:</label>
+            <input @bind="facturaViewModel.CondicionesDePago">
+        </div>
+    
+    
+</form>
 
+    
 
 @code {
-    
     private CrearFacturaViewModel facturaViewModel = new CrearFacturaViewModel();
-    private List<Cliente> clientes = new List<Cliente>();
-    private Contribuyente contribuyente = new Contribuyente();
+    private List<ConceptoViewModel> conceptoViewModels = new List<ConceptoViewModel>();
+    private ConceptoViewModel conceptoViewModel = new ConceptoViewModel();
+    private bool tieneIVA = false;
+
+    private float subTotalFactura = 0;
+    private float descuentoFactura = 0;
+    private float totalFactura = 0;
     
+
+    private int conceptos = 0;
+
     private string GetRFCFromCookies()
     {
         string RFC = "";
@@ -33,13 +83,31 @@
         }
         return RFC;
     }
-    
+
+    private async Task<Contribuyente> getContribuyente(string RFC)
+    {
+        Contribuyente myContribuyente = await ContribuyenteService.GetContribuyente(RFC);
+        return myContribuyente;
+    }
+
+    private async Task<List<Cliente>> getClientes()
+    {
+        List<Cliente> myClientes = await ClienteService.GetClientes();
+        return myClientes;
+    }
+
     protected override async Task OnInitializedAsync()
     {
-        string RFC=GetRFCFromCookies();
-        contribuyente = await ContribuyenteService.GetContribuyente(RFC);
-        clientes = await ClienteService.GetClientes();
+        string RFC = GetRFCFromCookies();
+        facturaViewModel.Contribuyente = await getContribuyente(RFC);
+        facturaViewModel.Clientes = await getClientes();
     }
+
+    private void NuevoConcepto()
+    {
+        
+    }
+    
     
     
     private async void PostFactura(Factura factura)

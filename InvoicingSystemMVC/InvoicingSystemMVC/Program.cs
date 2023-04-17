@@ -16,7 +16,7 @@ builder.Services.AddScoped<IContribuyenteRepository,ContribuyenteRepository>();
 builder.Services.AddScoped<IFacturaRepository,FacturaRepository>();
 builder.Services.AddScoped<IClienteService,ClienteService>();
 builder.Services.AddScoped<IContribuyenteService,ContribuyenteService>();
-builder.Services.AddScoped<IFacturaService,IFacturaService>();
+builder.Services.AddScoped<IFacturaService,FacturaService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {

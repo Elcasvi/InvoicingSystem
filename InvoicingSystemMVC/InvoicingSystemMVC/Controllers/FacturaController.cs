@@ -40,13 +40,14 @@ public class FacturaController:Controller
             };
         });
             
-        CrearFacturaViewModel facturaVM = new CrearFacturaViewModel()
+       /* CrearFacturaViewModel facturaVM = new CrearFacturaViewModel()
         {
             Contribuyente = contribuyente,
             Clientes = clientesItems
-        };
+        };*/
         
-        return View(facturaVM);
+        //return View(facturaVM);
+        return View();
     }
 
     [HttpPost]

@@ -12,9 +12,9 @@ public class ClienteService:IClienteService
         _httpClient = httpClient;
     }
 
-    public async Task<List<Cliente>> GetClientes()
+    public Task<List<Cliente>> GetClientes()
     {
-        var clientes= await _httpClient.GetFromJsonAsync<List<Cliente>>("/ApiCliente");
+        var clientes= _httpClient.GetFromJsonAsync<List<Cliente>>("/ApiCliente");
         return clientes;
     }
 }

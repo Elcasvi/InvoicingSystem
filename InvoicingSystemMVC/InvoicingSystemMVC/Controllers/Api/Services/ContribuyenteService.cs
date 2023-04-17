@@ -12,9 +12,10 @@ public class ContribuyenteService:IContribuyenteService
         _httpClient = httpClient;
     }
 
-    public async Task<Contribuyente> GetContribuyente(string RFC)
+    public Task<Contribuyente> GetContribuyente(string RFC)
     {
-        var contribuyente= await _httpClient.GetFromJsonAsync<Contribuyente>("/ApiContribuyente/"+RFC);
+        var contribuyente=  _httpClient.GetFromJsonAsync<Contribuyente>("/ApiContribuyente/"+RFC);
+        //Console.WriteLine(contribuyente.Result);
         return contribuyente;
     }
 }
