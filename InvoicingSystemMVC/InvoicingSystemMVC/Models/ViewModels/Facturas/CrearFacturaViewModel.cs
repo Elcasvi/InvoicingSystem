@@ -1,4 +1,5 @@
 ﻿using InvoicingSystemMVC.Models.Entities;
+using InvoicingSystemMVC.Models.Enums;
 
 
 namespace InvoicingSystemMVC.Models.ViewModels.Facturas;
@@ -14,9 +15,9 @@ public class CrearFacturaViewModel
     public string TipoDeFactura { get; set; }
     public string UsoDeFactura { get; set; }
     public DateTime FechaYHoraDeExpedicion { get; set; }
-    public string Moneda { get; set; }
-    public string FormaDePago { get; set; }
-    public string MetodoDePago { get; set; }
+    public Moneda Moneda { get; set; }//lISTA DE MONEDAS
+    public FormaDePago FormaDePago { get; set; }//LISTA DE FORMAS
+    public MetodoDePago MetodoDePago { get; set; }//LISTA DE PAGOS
     public string? Serie { get; set; }
     public string? Folio { get; set; }
     public string? CondicionesDePago { get; set; }
@@ -24,6 +25,7 @@ public class CrearFacturaViewModel
     public List<ConceptoViewModel> ConceptosViewModel { get; set; }
     public float SubtotalFactura { get; set; }
     public float? DescuentoFactura { get; set; }
+    public float TotalIVA { get; set; }
     public float TotalFactura { get; set; }
     //public string StatusDeFactura{ get; set; }
     
@@ -35,15 +37,16 @@ public class CrearFacturaViewModel
         TipoDeFactura=String.Empty;
         UsoDeFactura=String.Empty;
         FechaYHoraDeExpedicion = new DateTime();
-        Moneda=String.Empty;
-        FormaDePago=String.Empty;
-        MetodoDePago = String.Empty;
+        Moneda = Moneda.MXN;
+        FormaDePago= FormaDePago.Efectivo;
+        MetodoDePago = MetodoDePago.PPD;
         Serie=String.Empty;
         Folio=String.Empty;
         CondicionesDePago = String.Empty;
         ConceptosViewModel = new List<ConceptoViewModel>();
         SubtotalFactura = 0;
         DescuentoFactura = 0;
+        TotalIVA = 0;
         TotalFactura=0;
     }
 }

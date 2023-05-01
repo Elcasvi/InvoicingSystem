@@ -50,6 +50,7 @@ public class FacturaController:Controller
         return View();
     }
 
+    /*
     [HttpPost]
     public async  Task<IActionResult> CrearFactura(CrearFacturaViewModel facturaVM)
     {
@@ -118,4 +119,5 @@ public class FacturaController:Controller
      
      return RedirectToAction("Index", "Factura");
     }
+    */
 }

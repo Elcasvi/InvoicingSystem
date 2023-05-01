@@ -43,7 +43,7 @@ namespace InvoicingSystemMVC.Migrations
 
                     b.HasIndex("ContribuyenteRFC");
 
-                    b.ToTable("GetClientes");
+                    b.ToTable("Clientes");
                 });
 
             modelBuilder.Entity("InvoicingSystemMVC.Models.Entities.Concepto", b =>
@@ -219,6 +219,9 @@ namespace InvoicingSystemMVC.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("TotalFactura")
+                        .HasColumnType("real");
+
+                    b.Property<float>("TotalIVA")
                         .HasColumnType("real");
 
                     b.Property<string>("UsoDeFactura")

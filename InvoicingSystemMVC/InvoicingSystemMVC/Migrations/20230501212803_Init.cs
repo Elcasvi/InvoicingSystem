@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace InvoicingSystemMVC.Migrations
 {
-    public partial class InitDb : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -52,7 +52,7 @@ namespace InvoicingSystemMVC.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GetClientes",
+                name: "Clientes",
                 columns: table => new
                 {
                     RFC = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -90,6 +90,7 @@ namespace InvoicingSystemMVC.Migrations
                     CondicionesDePago = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SubtotalFactura = table.Column<float>(type: "real", nullable: false),
                     DescuentoFactura = table.Column<float>(type: "real", nullable: true),
+                    TotalIVA = table.Column<float>(type: "real", nullable: false),
                     TotalFactura = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
@@ -140,7 +141,7 @@ namespace InvoicingSystemMVC.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Clientes_ContribuyenteRFC",
-                table: "GetClientes",
+                table: "Clientes",
                 column: "ContribuyenteRFC");
 
             migrationBuilder.CreateIndex(
@@ -162,7 +163,7 @@ namespace InvoicingSystemMVC.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "GetClientes");
+                name: "Clientes");
 
             migrationBuilder.DropTable(
                 name: "Conceptos");

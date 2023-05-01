@@ -29,6 +29,7 @@ public class Factura
     //public string? FacturaRelacionada { get; set; }
     public float SubtotalFactura { get; set; }
     public float? DescuentoFactura { get; set; }
+    public float TotalIVA { get; set; }
     public float TotalFactura { get; set; }
     //public string StatusDeFactura{ get; set; }
 }

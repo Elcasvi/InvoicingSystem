@@ -10,5 +10,7 @@ public class ConceptoViewModel
     public float ValorUnitario { get; set; }
     public bool TieneIVA { get; set; }
     public float TasaIVA { get; set; }
+    public float SubtotalConcepto { get; set; }
     public float TotalIVA { get; set; }
+    public float TotalConcepto { get; set; }
 }

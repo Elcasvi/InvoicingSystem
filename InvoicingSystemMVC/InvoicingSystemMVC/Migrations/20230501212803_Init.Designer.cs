@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InvoicingSystemMVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230407021826_InitDb")]
-    partial class InitDb
+    [Migration("20230501212803_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -221,6 +221,9 @@ namespace InvoicingSystemMVC.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("TotalFactura")
+                        .HasColumnType("real");
+
+                    b.Property<float>("TotalIVA")
                         .HasColumnType("real");
 
                     b.Property<string>("UsoDeFactura")

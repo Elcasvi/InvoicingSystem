@@ -1,6 +1,7 @@
 ﻿@page "/CrearFactura"
 @using InvoicingSystemMVC.Models.Entities
 @using InvoicingSystemMVC.Controllers.Api.Services.Interfaces
+@using InvoicingSystemMVC.Models.Enums
 @using InvoicingSystemMVC.Models.ViewModels.Facturas
 @inject IHttpContextAccessor httpContextaccessor
 @inject IClienteService ClienteService;
@@ -12,64 +13,132 @@
 <PageTitle>Nueva Factura</PageTitle>
 
 <h1>Nueva Factura</h1>
-<p>@facturaViewModel.Contribuyente.RFC</p>
-<form>
+<p>@_facturaViewModel.Contribuyente.RFC</p>
+
     <div class="m-2 p-2">
         <label>Contribuyente:</label>
-        <label>@facturaViewModel.Contribuyente.RFC</label>
-        <input type="hidden" @bind="facturaViewModel.Contribuyente.RFC">
+        <label>@_facturaViewModel.Contribuyente.RFC</label>
+        <input type="hidden" @bind="_facturaViewModel.Contribuyente.RFC">
         
-        <select @bind="facturaViewModel.Cliente.RFC">
-            @foreach (Cliente cliente in facturaViewModel.Clientes)
+        <select @bind="_facturaViewModel.Cliente.RFC">
+            @foreach (Cliente cliente in _facturaViewModel.Clientes)
             {
                 <option value="@cliente">@cliente.RFC</option>
             }
         </select>
     </div>
-    <div class="m-2 p-2">
-            <label>Tipo de factura:</label>
-            <input @bind="facturaViewModel.TipoDeFactura">
+<div class="m-2 p-2">
+    <label>Tipo de factura:</label>
+    <input @bind="_facturaViewModel.TipoDeFactura">
             
-            <label>Uso de factura de factura:</label>
-            <input @bind="facturaViewModel.UsoDeFactura">
+    <label>Uso de factura de factura:</label>
+    <input @bind="_facturaViewModel.UsoDeFactura">
             
-            <label>Moneda:</label>
-            <input @bind="facturaViewModel.Moneda">
+    <label>Moneda:</label>
+    <select @bind="@_facturaViewModel.Moneda">
+        @foreach (Moneda moneda in Enum.GetValues(typeof(Moneda)))
+        {
+            <option value="@moneda">@moneda</option>
+        }
+    </select>
+        
+      
+        
+    <label>Forma de Pago:</label>
+    <select @bind="@_facturaViewModel.FormaDePago">
+        @foreach (FormaDePago formaDePagoa in Enum.GetValues(typeof(FormaDePago)))
+        {
+            <option value="@formaDePagoa">@formaDePagoa</option>
+        }
+    </select>
+        
             
-            <label>Forma de Pago:</label>
-            <input @bind="facturaViewModel.FormaDePago">
+    <label>Metodo de Pago:</label>
+    <select @bind="@_facturaViewModel.MetodoDePago">
+        @foreach (MetodoDePago metodoDePago in Enum.GetValues(typeof(MetodoDePago)))
+        {
+            <option value="@metodoDePago">@metodoDePago</option>
+        }
+    </select>
+        
             
-            <label>Metodo de Pago:</label>
-            <input @bind="facturaViewModel.MetodoDePago">
+    <label>Serie:</label>
+    <input @bind="_facturaViewModel.Serie">
             
-            <label>Serie:</label>
-            <input @bind="facturaViewModel.Serie">
+    <label>Folio:</label>
+    <input @bind="_facturaViewModel.Folio">
             
-            <label>Folio:</label>
-            <input @bind="facturaViewModel.Folio">
-            
-            <label>Condiciones de Pago:</label>
-            <input @bind="facturaViewModel.CondicionesDePago">
-        </div>
-    
-    
-</form>
+    <label>Condiciones de Pago:</label>
+    <input @bind="_facturaViewModel.CondicionesDePago">
+</div>
 
+<!-- Nuevo concepto -->
+<div class="m-2 p-2">
+    @if (_statusConcepto)
+    {
+        <label>Clave de Producto o Servicio:</label>
+        <input @bind="conceptoViewModel.ClaveDeProductoOServicio">
+
+        <label>Clave de Unidad:</label>
+        <input @bind="conceptoViewModel.ClaveDeUnidad">
+
+        <label>Cantidad:</label>
+        <input @bind="conceptoViewModel.Cantidad">
+
+        <label>Unidad:</label>
+        <input @bind="conceptoViewModel.Unidad">
+
+        <label>Numero de indentificacion:</label>
+        <input @bind="conceptoViewModel.NumeroDeIdentificacion">
+
+        <label>Descripcion:</label>
+        <input @bind="conceptoViewModel.Descripcion">
+
+        <label>Valor unitario:</label>
+        <input @bind="conceptoViewModel.ValorUnitario">
+        
+        <button class="btn btn-outline-success" onclick="@AddIVA">Agregar IVA</button>
+        
+        @if (conceptoViewModel.TieneIVA)
+        {
+            <label>Tasa IVA:</label>
+            <input @bind="conceptoViewModel.TasaIVA">
+            <button class="btn btn-outline-success" onclick="@RemoveIVA">Cancelar</button>
+        }
+        <button class="btn btn-outline-success" onclick="@AddNuevoConcepto">Agregar</button>
+    }
+    else
+    {
+        <button class="btn btn-outline-success" onclick="@NuevoConcepto">Nuevo Concepto</button>
+    }
     
+</div>
+
+<div>
+    @foreach (ConceptoViewModel concepto in _listaConceptos)
+    {
+        <p>@concepto.NumeroDeIdentificacion</p>
+        <p>@concepto.Descripcion</p>
+        <p>@concepto.Cantidad</p>
+        <p>@concepto.ValorUnitario</p>
+    }
+</div>
+
+<div class="m-2 p-2">
+    <p>Subtotal Factura:@_facturaViewModel.SubtotalFactura</p>
+    <p>Descuento Factura:@_facturaViewModel.DescuentoFactura</p>
+    <p>Total IVA:@_facturaViewModel.TotalIVA</p>
+    <p>Total Factura:@_facturaViewModel.TotalFactura</p>
+</div>
+
+
 
 @code {
-    private CrearFacturaViewModel facturaViewModel = new CrearFacturaViewModel();
-    private List<ConceptoViewModel> conceptoViewModels = new List<ConceptoViewModel>();
+    private CrearFacturaViewModel _facturaViewModel = new CrearFacturaViewModel();
+    private List<ConceptoViewModel> _listaConceptos = new List<ConceptoViewModel>();
     private ConceptoViewModel conceptoViewModel = new ConceptoViewModel();
-    private bool tieneIVA = false;
-
-    private float subTotalFactura = 0;
-    private float descuentoFactura = 0;
-    private float totalFactura = 0;
+    private bool _statusConcepto = false;
     
-
-    private int conceptos = 0;
-
     private string GetRFCFromCookies()
     {
         string RFC = "";
@@ -99,17 +168,57 @@
     protected override async Task OnInitializedAsync()
     {
         string RFC = GetRFCFromCookies();
-        facturaViewModel.Contribuyente = await getContribuyente(RFC);
-        facturaViewModel.Clientes = await getClientes();
-    }
-
-    private void NuevoConcepto()
-    {
+        _facturaViewModel.Contribuyente = await getContribuyente(RFC);
+        _facturaViewModel.Clientes = await getClientes();
         
     }
+    private void NuevoConcepto()
+    {
+        _statusConcepto = true;
+    }
     
+    private void AddNuevoConcepto()
+    {
+        if (conceptoViewModel.TieneIVA)
+        {
+            conceptoViewModel.SubtotalConcepto=(conceptoViewModel.Cantidad) * (conceptoViewModel.ValorUnitario);
+            conceptoViewModel.TotalIVA= (conceptoViewModel.SubtotalConcepto * conceptoViewModel.TasaIVA) / 100;
+            conceptoViewModel.TotalConcepto=conceptoViewModel.SubtotalConcepto+conceptoViewModel.TotalIVA;
+        }
+        else
+        {
+            conceptoViewModel.TotalConcepto=conceptoViewModel.SubtotalConcepto=(conceptoViewModel.Cantidad) * (conceptoViewModel.ValorUnitario);
+        }
+        _listaConceptos.Add(conceptoViewModel);
+        conceptoViewModel = new ConceptoViewModel();
+        CalcularTotal();
+        _statusConcepto = false;
+    }
     
-    
+    private void AddIVA()
+    {
+        conceptoViewModel.TieneIVA = true;
+    }
+    private void RemoveIVA()
+    {
+        conceptoViewModel.TieneIVA = false;
+    }
+
+    private void CalcularTotal()
+    {
+        ConceptoViewModel concepto =_listaConceptos[_listaConceptos.Count()-1];
+        if (concepto.TieneIVA)
+        {
+            _facturaViewModel.SubtotalFactura=_facturaViewModel.SubtotalFactura+concepto.SubtotalConcepto;
+            _facturaViewModel.TotalIVA=_facturaViewModel.TotalIVA+concepto.TotalIVA;
+            _facturaViewModel.TotalFactura=_facturaViewModel.TotalFactura+concepto.TotalConcepto;
+        }
+        else
+        {
+            _facturaViewModel.SubtotalFactura+=concepto.SubtotalConcepto; 
+            _facturaViewModel.TotalFactura+=concepto.TotalConcepto;
+        }
+    }
     private async void PostFactura(Factura factura)
     {
         var post = await FacturaService.PostFactura(factura);
