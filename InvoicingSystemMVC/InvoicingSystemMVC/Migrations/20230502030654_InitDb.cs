@@ -1,11 +1,10 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace InvoicingSystemMVC.Migrations
 {
-    public partial class Init : Migration
+    public partial class InitDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -44,7 +43,8 @@ namespace InvoicingSystemMVC.Migrations
                 {
                     RFC = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
                     RazonSocial = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RegimenFiscal = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    RegimenFiscal = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CP = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -58,6 +58,7 @@ namespace InvoicingSystemMVC.Migrations
                     RFC = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     RazonSocial = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RegimenFiscal = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CP = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContribuyenteRFC = table.Column<string>(type: "nvarchar(13)", nullable: false)
                 },
                 constraints: table =>
@@ -81,7 +82,7 @@ namespace InvoicingSystemMVC.Migrations
                     RFCReceptor = table.Column<string>(type: "nvarchar(13)", nullable: false),
                     TipoDeFactura = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UsoDeFactura = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FechaHoraDeExpedicion = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FechaHoraDeExpedicion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Moneda = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FormaDePago = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MetodoDePago = table.Column<string>(type: "nvarchar(max)", nullable: false),

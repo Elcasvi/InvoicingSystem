@@ -51,7 +51,8 @@ public class ClienteController:Controller
             RazonSocial= clienteVM.RazonSocial,
             RegimenFiscal = clienteVM.RegimenFiscal,
             Contribuyente = contribuyente,
-            ContribuyenteRFC =contribuyenteRFC 
+            ContribuyenteRFC =contribuyenteRFC,
+            CP = clienteVM.CP
         };
         _clienteRepository.Add(nuevoCliente);
         return RedirectToAction("Index", "Cliente");

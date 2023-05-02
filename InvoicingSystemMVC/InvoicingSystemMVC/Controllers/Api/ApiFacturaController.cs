@@ -25,6 +25,8 @@ public class ApiFacturaController:ControllerBase
     public async Task<IActionResult> Post([FromBody]Factura factura)
     {
         bool res=_facturaRepository.Add(factura);
-        return Ok();
+        Console.WriteLine("res:"+res);
+        Console.WriteLine("---------------------------------------------");
+        return Ok(res);
     }
 }

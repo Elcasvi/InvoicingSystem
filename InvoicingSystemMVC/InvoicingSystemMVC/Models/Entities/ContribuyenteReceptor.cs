@@ -13,4 +13,5 @@ public class ContribuyenteReceptor
     public string RazonSocial { get; set; }
     [Required]
     public string RegimenFiscal { get; set; }
+    public string CP { get; set; }
 }

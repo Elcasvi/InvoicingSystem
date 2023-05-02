@@ -13,7 +13,8 @@ public class Cliente
     
     [Required]
     public string RegimenFiscal { get; set; }
-    
+    [Required]
+    public string CP{ get; set; }
     public Contribuyente Contribuyente { get; set; }
     [ForeignKey("Contribuyente")]
     public string ContribuyenteRFC { get; set; }

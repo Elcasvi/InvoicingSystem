@@ -27,6 +27,10 @@ namespace InvoicingSystemMVC.Migrations
                     b.Property<string>("RFC")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("CP")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ContribuyenteRFC")
                         .IsRequired()
                         .HasColumnType("nvarchar(13)");
@@ -155,6 +159,10 @@ namespace InvoicingSystemMVC.Migrations
                         .HasMaxLength(13)
                         .HasColumnType("nvarchar(13)");
 
+                    b.Property<string>("CP")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("RazonSocial")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -182,8 +190,9 @@ namespace InvoicingSystemMVC.Migrations
                     b.Property<float?>("DescuentoFactura")
                         .HasColumnType("real");
 
-                    b.Property<DateTime>("FechaHoraDeExpedicion")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("FechaHoraDeExpedicion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Folio")
                         .HasColumnType("nvarchar(max)");

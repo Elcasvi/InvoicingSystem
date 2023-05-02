@@ -131,7 +131,7 @@
     <p>Total Factura:@_facturaViewModel.TotalFactura</p>
 </div>
 
-
+<button class="btn btn-outline-success" onclick="@PostFactura">Crear factura</button>
 
 @code {
     private CrearFacturaViewModel _facturaViewModel = new CrearFacturaViewModel();
@@ -219,9 +219,12 @@
             _facturaViewModel.TotalFactura+=concepto.TotalConcepto;
         }
     }
-    private async void PostFactura(Factura factura)
+    
+    private async void PostFactura()
     {
-        var post = await FacturaService.PostFactura(factura);
-        NavManager.NavigateTo("/");
+        Console.WriteLine("Dentro de post");
+        var post = await FacturaService.PostFactura(_facturaViewModel);
+        Console.WriteLine("post: --------------------------------------------------------------"+post);
+        NavManager.NavigateTo("/Cliente");
     }
 }

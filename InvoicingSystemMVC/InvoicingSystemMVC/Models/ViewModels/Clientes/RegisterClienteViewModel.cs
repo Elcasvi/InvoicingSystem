@@ -13,6 +13,10 @@ public class RegisterClienteViewModel
     public string RazonSocial { get; set; }
     
     [Display(Name = "Regimen Fiscal")]
-    [Required(ErrorMessage = "El Regime Fiscal es requerido")]
+    [Required(ErrorMessage = "El Regimen Fiscal es requerido")]
     public string RegimenFiscal { get; set; }
+    
+    [Display(Name = "CP")]
+    [Required(ErrorMessage = "El CP es requerido")]
+    public string CP { get; set; }
 }
