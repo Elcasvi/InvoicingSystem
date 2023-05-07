@@ -9,12 +9,8 @@ public class Factura
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
     
-    public ContribuyenteEmisor ContribuyenteEmisor { get; set; }
-    [ForeignKey("ContribuyenteEmisor")]
     public string RFCEmsior { get; set; }
-
-    public ContribuyenteReceptor ContribuyenteReceptor { get; set; }
-    [ForeignKey("ContribuyenteReceptor")]
+    
     public string RFCReceptor { get; set; }
     
     public string TipoDeFactura { get; set; }
@@ -35,6 +31,6 @@ public class Factura
 
     public override string ToString()
     {
-        return $"{nameof(Id)}: {Id}, {nameof(ContribuyenteEmisor)}: {ContribuyenteEmisor}, {nameof(RFCEmsior)}: {RFCEmsior}, {nameof(ContribuyenteReceptor)}: {ContribuyenteReceptor}, {nameof(RFCReceptor)}: {RFCReceptor}, {nameof(TipoDeFactura)}: {TipoDeFactura}, {nameof(UsoDeFactura)}: {UsoDeFactura}, {nameof(FechaHoraDeExpedicion)}: {FechaHoraDeExpedicion}, {nameof(Moneda)}: {Moneda}, {nameof(FormaDePago)}: {FormaDePago}, {nameof(MetodoDePago)}: {MetodoDePago}, {nameof(Serie)}: {Serie}, {nameof(Folio)}: {Folio}, {nameof(CondicionesDePago)}: {CondicionesDePago}, {nameof(SubtotalFactura)}: {SubtotalFactura}, {nameof(DescuentoFactura)}: {DescuentoFactura}, {nameof(TotalIVA)}: {TotalIVA}, {nameof(TotalFactura)}: {TotalFactura}";
+        return $"{nameof(Id)}: {Id}, {nameof(RFCEmsior)}: {RFCEmsior}, {nameof(RFCReceptor)}: {RFCReceptor}, {nameof(TipoDeFactura)}: {TipoDeFactura}, {nameof(UsoDeFactura)}: {UsoDeFactura}, {nameof(FechaHoraDeExpedicion)}: {FechaHoraDeExpedicion}, {nameof(Moneda)}: {Moneda}, {nameof(FormaDePago)}: {FormaDePago}, {nameof(MetodoDePago)}: {MetodoDePago}, {nameof(Serie)}: {Serie}, {nameof(Folio)}: {Folio}, {nameof(CondicionesDePago)}: {CondicionesDePago}, {nameof(SubtotalFactura)}: {SubtotalFactura}, {nameof(DescuentoFactura)}: {DescuentoFactura}, {nameof(TotalIVA)}: {TotalIVA}, {nameof(TotalFactura)}: {TotalFactura}";
     }
 }

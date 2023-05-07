@@ -49,4 +49,9 @@ public class CrearFacturaViewModel
         TotalIVA = 0;
         TotalFactura=0;
     }
+
+    public override string ToString()
+    {
+        return $"{nameof(Contribuyente)}: {Contribuyente.RFC} {Contribuyente.RazonSocial}, {nameof(Clientes)}: {Clientes}, {nameof(Cliente)}: {Cliente.RFC} {Cliente.RazonSocial}, {nameof(TipoDeFactura)}: {TipoDeFactura}, {nameof(UsoDeFactura)}: {UsoDeFactura}, {nameof(FechaYHoraDeExpedicion)}: {FechaYHoraDeExpedicion}, {nameof(Moneda)}: {Moneda}, {nameof(FormaDePago)}: {FormaDePago}, {nameof(MetodoDePago)}: {MetodoDePago}, {nameof(Serie)}: {Serie}, {nameof(Folio)}: {Folio}, {nameof(CondicionesDePago)}: {CondicionesDePago}, {nameof(ConceptosViewModel)}: {ConceptosViewModel}, {nameof(SubtotalFactura)}: {SubtotalFactura}, {nameof(DescuentoFactura)}: {DescuentoFactura}, {nameof(TotalIVA)}: {TotalIVA}, {nameof(TotalFactura)}: {TotalFactura}";
+    }
 }

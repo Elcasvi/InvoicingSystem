@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InvoicingSystemMVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230502030654_InitDb")]
-    partial class InitDb
+    [Migration("20230507010758_initDB")]
+    partial class initDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -132,52 +132,6 @@ namespace InvoicingSystemMVC.Migrations
                     b.ToTable("Contribuyentes");
                 });
 
-            modelBuilder.Entity("InvoicingSystemMVC.Models.Entities.ContribuyenteEmisor", b =>
-                {
-                    b.Property<string>("RFC")
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
-
-                    b.Property<string>("CP")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RazonSocial")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RegimenFiscal")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("RFC");
-
-                    b.ToTable("ContribuyentesEmisores");
-                });
-
-            modelBuilder.Entity("InvoicingSystemMVC.Models.Entities.ContribuyenteReceptor", b =>
-                {
-                    b.Property<string>("RFC")
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
-
-                    b.Property<string>("CP")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RazonSocial")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RegimenFiscal")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("RFC");
-
-                    b.ToTable("ContribuyentesReceptores");
-                });
-
             modelBuilder.Entity("InvoicingSystemMVC.Models.Entities.Factura", b =>
                 {
                     b.Property<int>("Id")
@@ -213,11 +167,11 @@ namespace InvoicingSystemMVC.Migrations
 
                     b.Property<string>("RFCEmsior")
                         .IsRequired()
-                        .HasColumnType("nvarchar(13)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RFCReceptor")
                         .IsRequired()
-                        .HasColumnType("nvarchar(13)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Serie")
                         .HasColumnType("nvarchar(max)");
@@ -240,10 +194,6 @@ namespace InvoicingSystemMVC.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("RFCEmsior");
-
-                    b.HasIndex("RFCReceptor");
 
                     b.ToTable("Facturas");
                 });
@@ -268,25 +218,6 @@ namespace InvoicingSystemMVC.Migrations
                         .IsRequired();
 
                     b.Navigation("Factura");
-                });
-
-            modelBuilder.Entity("InvoicingSystemMVC.Models.Entities.Factura", b =>
-                {
-                    b.HasOne("InvoicingSystemMVC.Models.Entities.ContribuyenteEmisor", "ContribuyenteEmisor")
-                        .WithMany()
-                        .HasForeignKey("RFCEmsior")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("InvoicingSystemMVC.Models.Entities.ContribuyenteReceptor", "ContribuyenteReceptor")
-                        .WithMany()
-                        .HasForeignKey("RFCReceptor")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ContribuyenteEmisor");
-
-                    b.Navigation("ContribuyenteReceptor");
                 });
 #pragma warning restore 612, 618
         }

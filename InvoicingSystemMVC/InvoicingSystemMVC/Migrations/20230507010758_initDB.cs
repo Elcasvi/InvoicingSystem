@@ -4,7 +4,7 @@
 
 namespace InvoicingSystemMVC.Migrations
 {
-    public partial class InitDb : Migration
+    public partial class initDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,31 +24,30 @@ namespace InvoicingSystemMVC.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ContribuyentesEmisores",
+                name: "Facturas",
                 columns: table => new
                 {
-                    RFC = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
-                    RazonSocial = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RegimenFiscal = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CP = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RFCEmsior = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RFCReceptor = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TipoDeFactura = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UsoDeFactura = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FechaHoraDeExpedicion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Moneda = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FormaDePago = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MetodoDePago = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Serie = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Folio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CondicionesDePago = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SubtotalFactura = table.Column<float>(type: "real", nullable: false),
+                    DescuentoFactura = table.Column<float>(type: "real", nullable: true),
+                    TotalIVA = table.Column<float>(type: "real", nullable: false),
+                    TotalFactura = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ContribuyentesEmisores", x => x.RFC);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ContribuyentesReceptores",
-                columns: table => new
-                {
-                    RFC = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
-                    RazonSocial = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RegimenFiscal = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CP = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ContribuyentesReceptores", x => x.RFC);
+                    table.PrimaryKey("PK_Facturas", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -68,45 +67,6 @@ namespace InvoicingSystemMVC.Migrations
                         name: "FK_Clientes_Contribuyentes_ContribuyenteRFC",
                         column: x => x.ContribuyenteRFC,
                         principalTable: "Contribuyentes",
-                        principalColumn: "RFC",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Facturas",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RFCEmsior = table.Column<string>(type: "nvarchar(13)", nullable: false),
-                    RFCReceptor = table.Column<string>(type: "nvarchar(13)", nullable: false),
-                    TipoDeFactura = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UsoDeFactura = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FechaHoraDeExpedicion = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Moneda = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FormaDePago = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MetodoDePago = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Serie = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Folio = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CondicionesDePago = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SubtotalFactura = table.Column<float>(type: "real", nullable: false),
-                    DescuentoFactura = table.Column<float>(type: "real", nullable: true),
-                    TotalIVA = table.Column<float>(type: "real", nullable: false),
-                    TotalFactura = table.Column<float>(type: "real", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Facturas", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Facturas_ContribuyentesEmisores_RFCEmsior",
-                        column: x => x.RFCEmsior,
-                        principalTable: "ContribuyentesEmisores",
-                        principalColumn: "RFC",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Facturas_ContribuyentesReceptores_RFCReceptor",
-                        column: x => x.RFCReceptor,
-                        principalTable: "ContribuyentesReceptores",
                         principalColumn: "RFC",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -149,16 +109,6 @@ namespace InvoicingSystemMVC.Migrations
                 name: "IX_Conceptos_FacturaId",
                 table: "Conceptos",
                 column: "FacturaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Facturas_RFCEmsior",
-                table: "Facturas",
-                column: "RFCEmsior");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Facturas_RFCReceptor",
-                table: "Facturas",
-                column: "RFCReceptor");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -174,12 +124,6 @@ namespace InvoicingSystemMVC.Migrations
 
             migrationBuilder.DropTable(
                 name: "Facturas");
-
-            migrationBuilder.DropTable(
-                name: "ContribuyentesEmisores");
-
-            migrationBuilder.DropTable(
-                name: "ContribuyentesReceptores");
         }
     }
 }

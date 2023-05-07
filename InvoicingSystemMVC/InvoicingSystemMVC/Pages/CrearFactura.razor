@@ -21,11 +21,13 @@
         <input type="hidden" @bind="_facturaViewModel.Contribuyente.RFC">
         
         <select @bind="_facturaViewModel.Cliente.RFC">
+            <option>Selecciona un cliente</option>
             @foreach (Cliente cliente in _facturaViewModel.Clientes)
             {
-                <option value="@cliente">@cliente.RFC</option>
+                <option value="@cliente.RFC">@cliente.RFC</option>
             }
         </select>
+        <h1>ClienteRFC:@_facturaViewModel.Cliente.RFC</h1>
     </div>
 <div class="m-2 p-2">
     <label>Tipo de factura:</label>
@@ -36,6 +38,7 @@
             
     <label>Moneda:</label>
     <select @bind="@_facturaViewModel.Moneda">
+        <option>Selecciona una moneda</option>
         @foreach (Moneda moneda in Enum.GetValues(typeof(Moneda)))
         {
             <option value="@moneda">@moneda</option>
@@ -46,6 +49,7 @@
         
     <label>Forma de Pago:</label>
     <select @bind="@_facturaViewModel.FormaDePago">
+        <option>Selecciona una forma de pago</option>
         @foreach (FormaDePago formaDePagoa in Enum.GetValues(typeof(FormaDePago)))
         {
             <option value="@formaDePagoa">@formaDePagoa</option>
@@ -55,6 +59,7 @@
             
     <label>Metodo de Pago:</label>
     <select @bind="@_facturaViewModel.MetodoDePago">
+         <option>Selecciona un metodo de pago</option>
         @foreach (MetodoDePago metodoDePago in Enum.GetValues(typeof(MetodoDePago)))
         {
             <option value="@metodoDePago">@metodoDePago</option>
@@ -222,9 +227,15 @@
     
     private async void PostFactura()
     {
+        
         Console.WriteLine("Dentro de post");
+        Console.WriteLine(_facturaViewModel.ToString());
         var post = await FacturaService.PostFactura(_facturaViewModel);
-        Console.WriteLine("post: --------------------------------------------------------------"+post);
+        Console.WriteLine("post: --------------------------------------------------------------");
+        Console.WriteLine("post.Content: "+post.Content);
+        Console.WriteLine("post.Headers: "+post.Headers);
+        Console.WriteLine("post.RequestMessage:"+post.RequestMessage);
+        
         NavManager.NavigateTo("/Cliente");
     }
 }

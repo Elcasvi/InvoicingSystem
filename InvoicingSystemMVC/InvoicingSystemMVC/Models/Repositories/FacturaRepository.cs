@@ -1,6 +1,7 @@
 ﻿using InvoicingSystemMVC.Controllers;
 using InvoicingSystemMVC.Models.Entities;
 using InvoicingSystemMVC.Models.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace InvoicingSystemMVC.Models.Repositories;
 
@@ -18,6 +19,10 @@ public class FacturaRepository:IFacturaRepository
     {
         _dbContext.Facturas.Add(factura);
         return Save();
+    }
+    public async Task<Factura> GetFactura(string RFCEmsior,string RFCReceptor,string FechaYHora)
+    {
+        return await _dbContext.Facturas.Where(f => f.RFCEmsior == RFCEmsior).Where(f => f.RFCReceptor == RFCReceptor).Where(f => f.FechaHoraDeExpedicion == FechaYHora).FirstOrDefaultAsync();
     }
 
     public bool Delete()

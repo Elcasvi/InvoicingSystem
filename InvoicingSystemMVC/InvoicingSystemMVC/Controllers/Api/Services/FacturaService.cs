@@ -1,5 +1,6 @@
 ﻿using InvoicingSystemMVC.Controllers.Api.Services.Interfaces;
 using InvoicingSystemMVC.Models.Entities;
+using InvoicingSystemMVC.Models.Interfaces;
 using InvoicingSystemMVC.Models.ViewModels.Facturas;
 
 
@@ -8,10 +9,12 @@ namespace InvoicingSystemMVC.Controllers.Api.Services;
 public class FacturaService:IFacturaService
 {
     private readonly HttpClient _httpClient;
+    private readonly IFacturaRepository _facturaRepository;
 
-    public FacturaService(HttpClient httpClient)
+    public FacturaService(HttpClient httpClient,IFacturaRepository facturaRepository)
     {
         _httpClient = httpClient;
+        _facturaRepository =facturaRepository;
     }
 
     
@@ -55,8 +58,8 @@ public class FacturaService:IFacturaService
 
         Factura factura = new Factura()
         {
-            ContribuyenteEmisor = contribuyenteEmisor,
-            ContribuyenteReceptor = contribuyenteReceptor,
+            //ContribuyenteEmisor = contribuyenteEmisor,
+            //ContribuyenteReceptor = contribuyenteReceptor,
             RFCEmsior = facturaVM.Contribuyente.RFC,
             RFCReceptor = facturaVM.Cliente.RFC,
             TipoDeFactura = facturaVM.TipoDeFactura,
@@ -77,17 +80,21 @@ public class FacturaService:IFacturaService
         
         Console.WriteLine(factura.ToString());
         
-        
+        Console.WriteLine("Antes de la llamada a la api");
         var response = _httpClient.PostAsJsonAsync("/ApiFactura",factura);
         Console.WriteLine("Response: "+response);
         Console.WriteLine("-------------------------------------------------------------------------------------------------------------");
+
+        var facturaRecuperada = _facturaRepository.GetFactura(factura.RFCEmsior, factura.RFCReceptor, factura.FechaHoraDeExpedicion);
+        //facturaRecuperada.Id;
         
-        /*
+        
+        
         foreach (var concepto in facturaVM.ConceptosViewModel)
         {
             
         }
-        */
+        
         return response;
         //return await response.Content.ReadFromJsonAsync<bool>();
     }
