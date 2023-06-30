@@ -98,8 +98,6 @@ namespace InvoicingSystemMVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FacturaId");
-
                     b.ToTable("Conceptos");
                 });
 
@@ -205,17 +203,6 @@ namespace InvoicingSystemMVC.Migrations
                         .IsRequired();
 
                     b.Navigation("Contribuyente");
-                });
-
-            modelBuilder.Entity("InvoicingSystemMVC.Models.Entities.Concepto", b =>
-                {
-                    b.HasOne("InvoicingSystemMVC.Models.Entities.Factura", "Factura")
-                        .WithMany()
-                        .HasForeignKey("FacturaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Factura");
                 });
 #pragma warning restore 612, 618
         }

@@ -195,6 +195,7 @@
             conceptoViewModel.TotalConcepto=conceptoViewModel.SubtotalConcepto=(conceptoViewModel.Cantidad) * (conceptoViewModel.ValorUnitario);
         }
         _listaConceptos.Add(conceptoViewModel);
+        Console.WriteLine("Lista de conceptos desde addnuevoconcepto: "+_listaConceptos.Count());
         conceptoViewModel = new ConceptoViewModel();
         CalcularTotal();
         _statusConcepto = false;
@@ -227,7 +228,13 @@
     
     private async void PostFactura()
     {
-        
+        _facturaViewModel.ConceptosViewModel=_listaConceptos;
+        Console.WriteLine("Imprimiendo los conceptos");
+        Console.WriteLine("Numero de conceptos: "+_facturaViewModel.ConceptosViewModel.Count());
+        for (int i=0;i< _facturaViewModel.ConceptosViewModel.Count(); i++)
+        {
+            Console.WriteLine(_facturaViewModel.ConceptosViewModel[i].Descripcion);
+        }
         Console.WriteLine("Dentro de post");
         Console.WriteLine(_facturaViewModel.ToString());
         var post = await FacturaService.PostFactura(_facturaViewModel);
@@ -236,6 +243,6 @@
         Console.WriteLine("post.Headers: "+post.Headers);
         Console.WriteLine("post.RequestMessage:"+post.RequestMessage);
         
-        NavManager.NavigateTo("/Cliente");
+        NavManager.NavigateTo("/Factura");
     }
 }

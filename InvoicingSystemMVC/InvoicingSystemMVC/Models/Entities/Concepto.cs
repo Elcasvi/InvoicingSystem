@@ -6,13 +6,7 @@ namespace InvoicingSystemMVC.Models.Entities;
 public class Concepto
 {
     [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
-    
-    public Factura Factura { get; set; }
-    [ForeignKey("Factura")]
-    public int FacturaId { get; set; }
-    
     public string ClaveDeProductoOServicio { get; set; }
     public string ClaveDeUnidad { get; set; }
     public int Cantidad{ get; set; }
@@ -23,4 +17,5 @@ public class Concepto
     public bool TieneIVA { get; set; }
     public float TasaIVA { get; set; }
     public float TotalIVA { get; set; }
+    public int FacturaId { get; set; }
 }

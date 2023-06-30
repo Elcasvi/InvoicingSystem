@@ -6,7 +6,6 @@ namespace InvoicingSystemMVC.Models.Entities;
 public class Factura
 {
     [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
     
     public string RFCEmsior { get; set; }

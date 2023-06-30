@@ -15,11 +15,13 @@ public class ApiFacturaController:ControllerBase
     }
 
     //GET: ApiFactura/GetClientes
-    [HttpGet]
-    public async Task<IActionResult> GetClientes()
+    [HttpGet("{RFCEmsior}/{RFCReceptor}/{FechaYHoraDeExpedicion}")]
+    public async Task<IActionResult> GetFactura(string RFCEmsior,string RFCReceptor,string FechaYHoraDeExpedicion)
     {
-        return Ok();
+        var facturaRecuperada =await _facturaRepository.GetFactura(RFCEmsior,RFCReceptor, FechaYHoraDeExpedicion);
+        return Ok(facturaRecuperada);
     }
+    
     //POST: ApiFactura
     [HttpPost]
     public async Task<IActionResult> Post([FromBody]Factura factura)
@@ -29,4 +31,5 @@ public class ApiFacturaController:ControllerBase
         Console.WriteLine("---------------------------------------------");
         return Ok(res);
     }
+    
 }

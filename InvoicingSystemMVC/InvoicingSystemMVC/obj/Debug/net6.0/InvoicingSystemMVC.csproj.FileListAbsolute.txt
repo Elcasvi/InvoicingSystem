@@ -74,14 +74,12 @@ C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystem
 C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC\bin\Debug\net6.0\InvoicingSystemMVC.runtimeconfig.json
 C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC\bin\Debug\net6.0\InvoicingSystemMVC.dll
 C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC\bin\Debug\net6.0\InvoicingSystemMVC.pdb
-C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC\bin\Debug\net6.0\Humanizer.dll
 C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
 C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
 C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
-C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
 C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
 C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
@@ -138,3 +136,5 @@ C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystem
 C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC\bin\Debug\net6.0\Microsoft.AspNetCore.Components.dll
 C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC\bin\Debug\net6.0\Microsoft.AspNetCore.Metadata.dll
 C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC\bin\Debug\net6.0\Humanizer.dll
+C:\DotNet\Dot Net Core\AspDotNet\InvoicingSystem\InvoicingSystem\InvoicingSystemMVC\InvoicingSystemMVC\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll

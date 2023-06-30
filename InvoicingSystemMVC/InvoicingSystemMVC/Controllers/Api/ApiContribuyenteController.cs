@@ -14,7 +14,7 @@ public class ApiContribuyenteController:ControllerBase
         _contribuyenteRepository = contribuyenteRepository;
     }
 
-    //GET: ApiFactura/GetContribuyente
+    //GET: ApiContribuyente/RFC
     [HttpGet("{RFC}",Name = "GetContribuyente")]
     public async Task<IActionResult> GetContribuyente(string RFC)
     {

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InvoicingSystemMVC.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230507010758_initDB")]
-    partial class initDB
+    [Migration("20230630034851_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -99,8 +99,6 @@ namespace InvoicingSystemMVC.Migrations
                         .HasColumnType("real");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("FacturaId");
 
                     b.ToTable("Conceptos");
                 });
@@ -207,17 +205,6 @@ namespace InvoicingSystemMVC.Migrations
                         .IsRequired();
 
                     b.Navigation("Contribuyente");
-                });
-
-            modelBuilder.Entity("InvoicingSystemMVC.Models.Entities.Concepto", b =>
-                {
-                    b.HasOne("InvoicingSystemMVC.Models.Entities.Factura", "Factura")
-                        .WithMany()
-                        .HasForeignKey("FacturaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Factura");
                 });
 #pragma warning restore 612, 618
         }

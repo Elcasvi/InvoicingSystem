@@ -1,6 +1,5 @@
 ﻿using InvoicingSystemMVC.Controllers.Api.Services.Interfaces;
 using InvoicingSystemMVC.Models.Entities;
-using InvoicingSystemMVC.Models.Interfaces;
 using InvoicingSystemMVC.Models.ViewModels.Facturas;
 
 
@@ -9,57 +8,20 @@ namespace InvoicingSystemMVC.Controllers.Api.Services;
 public class FacturaService:IFacturaService
 {
     private readonly HttpClient _httpClient;
-    private readonly IFacturaRepository _facturaRepository;
 
-    public FacturaService(HttpClient httpClient,IFacturaRepository facturaRepository)
+    public FacturaService(HttpClient httpClient)
     {
         _httpClient = httpClient;
-        _facturaRepository =facturaRepository;
     }
 
     
-    public Task<HttpResponseMessage> PostFactura(CrearFacturaViewModel facturaVM)
+    public async Task<HttpResponseMessage> PostFactura(CrearFacturaViewModel facturaVM)
     {
         string fechaYHora=DateTime.Now.ToString("s");
-        Console.WriteLine("fecha y hora: "+fechaYHora);
-        //2019-01-06T17:16:40
-        /*
-        // 2015 is year, 12 is month, 25 is day  
-        DateTime date1 = new DateTime(2015, 12, 25);   
-        Console.WriteLine(date1.ToString()); // 12/25/2015 12:00:00 AM    
-      
-        // 2015 - year, 12 - month, 25 – day, 10 – hour, 30 – minute, 50 - second  
-        DateTime date2 = new DateTime(2012, 12, 25, 10, 30, 50);   
-        Console.WriteLine(date1.ToString());// 12/25/2015 10:30:00 AM }  
-        
-        
-        DateTime tempDate = new DateTime(2015, 12, 08); // creating date object with 8th December 2015  
-        Console.WriteLine(tempDate.ToString("MMMM dd, yyyy")); //December 08, 2105.  
-        DateTime tempDate2 = new DateTime(2015, 12, 08,10, 30, 50); // creating date object with 8th December 2015
-        Console.WriteLine(tempDate2.ToString("s")); //December 08, 2105.
-*/
-        
 
-        ContribuyenteEmisor contribuyenteEmisor = new ContribuyenteEmisor()
-        {
-            RFC = facturaVM.Contribuyente.RFC,
-            RazonSocial = facturaVM.Contribuyente.RazonSocial,
-            RegimenFiscal= facturaVM.Contribuyente.RegimenFiscal,
-            CP = facturaVM.Contribuyente.CP
-        };
-        
-        ContribuyenteReceptor contribuyenteReceptor = new ContribuyenteReceptor()
-        {
-            RFC = facturaVM.Cliente.RFC,
-            RazonSocial = facturaVM.Cliente.RazonSocial,
-            RegimenFiscal = facturaVM.Cliente.RegimenFiscal,
-            CP = facturaVM.Cliente.CP
-        };
-
+        Console.WriteLine("Size: "+facturaVM.ConceptosViewModel.Count());
         Factura factura = new Factura()
         {
-            //ContribuyenteEmisor = contribuyenteEmisor,
-            //ContribuyenteReceptor = contribuyenteReceptor,
             RFCEmsior = facturaVM.Contribuyente.RFC,
             RFCReceptor = facturaVM.Cliente.RFC,
             TipoDeFactura = facturaVM.TipoDeFactura,
@@ -77,25 +39,48 @@ public class FacturaService:IFacturaService
             TotalFactura = facturaVM.TotalFactura,
         };
         
+        var response =await _httpClient.PostAsJsonAsync("/ApiFactura",factura);
         
-        Console.WriteLine(factura.ToString());
-        
-        Console.WriteLine("Antes de la llamada a la api");
-        var response = _httpClient.PostAsJsonAsync("/ApiFactura",factura);
-        Console.WriteLine("Response: "+response);
-        Console.WriteLine("-------------------------------------------------------------------------------------------------------------");
-
-        var facturaRecuperada = _facturaRepository.GetFactura(factura.RFCEmsior, factura.RFCReceptor, factura.FechaHoraDeExpedicion);
-        //facturaRecuperada.Id;
+        Console.WriteLine("Antes de recuperar la factura");
+        Factura facturaRecuperada = await _httpClient.GetFromJsonAsync<Factura>("/ApiFactura/"+factura.RFCEmsior+"/"+factura.RFCReceptor+"/"+factura.FechaHoraDeExpedicion);
+        Console.WriteLine("----------------------------------------------------------------------------------------------");
+        Console.WriteLine("facturaRecuperada: "+facturaRecuperada.Id);
         
         
-        
-        foreach (var concepto in facturaVM.ConceptosViewModel)
+        Console.WriteLine("Size: "+facturaVM.ConceptosViewModel.Count());
+        foreach (var VARIABLE in facturaVM.ConceptosViewModel)
         {
-            
+            Console.WriteLine("Descripcion: "+VARIABLE.Descripcion);
+            Console.WriteLine("Cantidad"+VARIABLE.Cantidad);
         }
-        
+
+        PostConceptos(facturaVM.ConceptosViewModel,facturaRecuperada);
         return response;
         //return await response.Content.ReadFromJsonAsync<bool>();
+    }
+
+    private async void PostConceptos(List<ConceptoViewModel> conceptosVM,Factura facturaRecuperada)
+    {
+        foreach (ConceptoViewModel conceptoVM in conceptosVM)
+        {
+            Console.WriteLine("Dentro del foreach");
+            Concepto concepto = new Concepto()
+            {
+                ClaveDeProductoOServicio = conceptoVM.ClaveDeProductoOServicio,
+                ClaveDeUnidad = conceptoVM.ClaveDeUnidad,
+                Cantidad = conceptoVM.Cantidad,
+                Unidad = conceptoVM.Unidad,
+                NumeroDeIdentificacion=conceptoVM.NumeroDeIdentificacion,
+                Descripcion = conceptoVM.Descripcion,
+                ValorUnitario = conceptoVM.ValorUnitario,
+                TieneIVA = conceptoVM.TieneIVA,
+                TasaIVA = conceptoVM.TasaIVA,
+                TotalIVA = conceptoVM.TotalIVA,
+                FacturaId = facturaRecuperada.Id
+            };
+            Console.WriteLine("Antes de agregar un nuevo concepto"+concepto.Descripcion);
+            var res=await _httpClient.PostAsJsonAsync("/ApiConcepto",concepto);
+            Console.WriteLine("Concepto hecho: "+res);
+        }
     }
 }
