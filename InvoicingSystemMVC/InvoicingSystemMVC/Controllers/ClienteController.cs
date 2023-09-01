@@ -67,7 +67,8 @@ public class ClienteController:Controller
             {
                 RFC = cliente.RFC,
                 RazonSocial = cliente.RazonSocial,
-                RegimenFiscal = cliente.RegimenFiscal
+                RegimenFiscal = cliente.RegimenFiscal,
+                CP = cliente.CP
             };
             return View(editarClienteVM);
         }
@@ -91,6 +92,7 @@ public class ClienteController:Controller
             RFC = editarClienteVM.RFC,
             RazonSocial = editarClienteVM.RazonSocial,
             RegimenFiscal = editarClienteVM.RegimenFiscal,
+            CP=editarClienteVM.CP,
             Contribuyente = contribuyente,
             ContribuyenteRFC = contribuyenteRFC
         };
@@ -105,7 +107,8 @@ public class ClienteController:Controller
         {
             RFC =cliente.RFC,
             RazonSocial = cliente.RazonSocial,
-            RegimenFiscal = cliente.RegimenFiscal
+            RegimenFiscal = cliente.RegimenFiscal,
+            CP=cliente.CP
         };
         return View(editarClienteVM);
     }

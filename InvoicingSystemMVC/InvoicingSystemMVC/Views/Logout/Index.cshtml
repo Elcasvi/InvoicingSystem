@@ -1,14 +1,18 @@
 ﻿@model InvoicingSystemMVC.Models.ViewModels.LogoutContribuyenteViewModel
-<div class="row">
-    <div class="col-md-8 offset-2">
-        <form asp-action="Index" method="post">
-            <div>
-                <h1>¿Are you sure you want to logout?</h1>
-                <h1>@Model.Contribuyente.RFC</h1>
-                <div class="d-flex justify-content-center">
-                    <input class="btn btn-outline-success float right" type="submit" value="Log out"/>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Are you sure you want to log out?</h2>
+                    <h3 class="card-subtitle mb-3">@Model.Contribuyente.RFC</h3>
+                    <form asp-action="Index" method="post">
+                        <div class="text-center">
+                            <button class="btn btn-danger btn-lg" type="submit">Log Out</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 </div>

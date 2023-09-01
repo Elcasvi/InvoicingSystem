@@ -1,14 +1,19 @@
 @using InvoicingSystemMVC.Models.Entities
 @model IEnumerable<InvoicingSystemMVC.Models.Entities.Cliente>
-<h1>Hello from CLIENTES</h1>
 <div>
-    <a class="btn btn-primary m-2" asp-area="" asp-controller="Cliente" asp-action="CrearCliente">Nuevo cliente</a>
     @if (Model == null)
     {
-        <h1>Agrega un nuevo cliente</h1>
+        <div class="container mt-5 text-center">
+            <h1>Invoices</h1>
+            <div>
+                <a class="btn btn-primary m-2" asp-area="" asp-controller="Cliente" asp-action="CrearCliente">Nuevo cliente</a>
+            </div>
+        </div>
     }
     else
     {
+        <h1>Clients</h1>
+        <a class="btn btn-primary m-2" asp-area="" asp-controller="Cliente" asp-action="CrearCliente">Nuevo cliente</a>
     @foreach (Cliente cliente in Model)
     {
         <div class="card m-2">
@@ -18,10 +23,11 @@
             <div class="card-body">
                 <h5 class="card-title">@cliente.RazonSocial</h5>
                 <p class="card-text">@cliente.RegimenFiscal</p>
+                <p class="card-text">Código Postal: @cliente.CP</p>
             </div>
             <div class="d-flex justify-content-end">
-                <a class="btn btn-primary m-2" asp-area="" asp-controller="Cliente" asp-action="EditarCliente" asp-route-RFC="@cliente.RFC">Editar</a>
-                <a class="btn btn-primary m-2" asp-area="" asp-controller="Cliente" asp-action="Eliminar" asp-route-RFC="@cliente.RFC">Eliminar</a>
+                <a class="btn btn-primary m-2" asp-area="" asp-controller="Cliente" asp-action="EditarCliente" asp-route-RFC="@cliente.RFC">Edit</a>
+                <a class="btn btn-danger m-2" asp-area="" asp-controller="Cliente" asp-action="Eliminar" asp-route-RFC="@cliente.RFC">Delete</a>
             </div>
         </div>
     }

@@ -1,6 +1,5 @@
+
 using InvoicingSystemMVC.Controllers;
-using InvoicingSystemMVC.Controllers.Api.Services;
-using InvoicingSystemMVC.Controllers.Api.Services.Interfaces;
 using InvoicingSystemMVC.Models.Interfaces;
 using InvoicingSystemMVC.Models.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -9,20 +8,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages();
-builder.Services.AddServerSideBlazor();
+
 builder.Services.AddScoped<IClienteRepository,ClienteRepository>();
 builder.Services.AddScoped<IContribuyenteRepository,ContribuyenteRepository>();
 builder.Services.AddScoped<IFacturaRepository,FacturaRepository>();
 builder.Services.AddScoped<IConceptoRepository,ConceptoRepository>();
-builder.Services.AddScoped<IClienteService,ClienteService>();
-builder.Services.AddScoped<IContribuyenteService,ContribuyenteService>();
-builder.Services.AddScoped<IFacturaService,FacturaService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
 builder.Services.AddCors(opciones =>
 {
     opciones.AddPolicy("nuevaPolitica", app =>
@@ -33,7 +29,7 @@ builder.Services.AddCors(opciones =>
     });
 });
 
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7060") });
+
 
 var app = builder.Build();
 
@@ -58,7 +54,6 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
-    endpoints.MapBlazorHub();
 });
-app.MapFallbackToController("Blazor", "Home");
+
 app.Run();

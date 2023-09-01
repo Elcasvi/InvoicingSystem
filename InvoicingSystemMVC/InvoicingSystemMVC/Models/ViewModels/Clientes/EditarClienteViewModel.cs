@@ -15,4 +15,8 @@ public class EditarClienteViewModel
     [Display(Name = "Regimen Fiscal")]
     [Required(ErrorMessage = "El Regime Fiscal es requerido")]
     public string RegimenFiscal { get; set; }
+
+    [Display(Name = "Código postal")]
+    [Required(ErrorMessage = "El Código postal es requerido")]
+    public string CP { get; set; }
 }
