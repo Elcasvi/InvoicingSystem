@@ -1,0 +1,23 @@
+﻿@page "/FacturaFinalizada/{FacturaId}"
+@using InvoicingSystemBlazor.Controllers.Api.Services.Interfaces
+@using InvoicingSystemBlazor.Models.Entities;
+@inject IFacturaService FacturaService;
+
+
+<h1>FacturaFinalizada</h1>
+
+<a href="https://invoicingsystem.azurewebsites.net/" class="btn btn-primary">Aceptar</a>
+<h3>@facturaRecuperada.Id</h3>
+
+@code {
+    [Parameter]
+    public string FacturaId { get; set;}
+    Factura facturaRecuperada = new Factura();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        int Id = Convert.ToInt32(FacturaId);
+        facturaRecuperada = await FacturaService.GetFactura(Id);
+    }
+}
